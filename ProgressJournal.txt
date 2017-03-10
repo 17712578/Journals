@@ -12,3 +12,7 @@
 •	Read the driver manual, See technical journal for details.
 •	Discovered which variables are linked to the Platforms, Coil car and Coil lifter.
 •	Still unable to find how to move slide control, read LED variables or move coil loaders.
+10/03/2017
+•	
+•
+•

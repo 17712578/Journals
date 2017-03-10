@@ -1,0 +1,20 @@
+08/03/2017
+The drivers have a speed range of 20,000 to -20000.
+Normally 7 variables are linked to one platform
+
+Problems
+	PE034 is not built in to the system
+	Header file cannot be found
+	Reflective memory is not connected to the embedded server 
+
+09/03/2017
+The driver manaul
+-The driver contains API functions that enable you to
+	Open and close the driver
+	Configure the board
+	Transfer data 
+	Control/handle interrupts events
+- When writing code
+	The first step is to open the driver
+	You can call RFM2gErrorMsg() function with the error to retrieve a description of the error code
+	Byte swapping may be required due to different systems requiring Big Endian & Little Endian 
