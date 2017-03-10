@@ -1,0 +1,14 @@
+08/03/2017
+•	Teleco Meeting with Peter, Patrick, Dr Thomas and Ash
+•	Signed contracts, roughly 8 hour days required, I have copy for myself and the university.
+•	Met my demonstrator ‘Sia’ we will be working on the BaSys40 project together.
+•	Went to the downstairs lab, learnt how to power up and shut down the severs
+•	Used Putty to start up in built MabLab equations, then displayed the full factory layout on Tv
+•	The aim of this project is to move the alumina rolls around the factory.
+•	Was able to manually move the coil, changed speed and direction.
+09/03/2017
+•	Read the factory manual, translated some German names of the factory to English.
+•	The factory has possibility to advance into a rolling process this part is critical. As thickness, temperature, and number of remaining stitches must be taken into consideration when rolling the aluminium. 
+•	Read the driver manual, See technical journal for details.
+•	Discovered which variables are linked to the Platforms, Coil car and Coil lifter.
+•	Still unable to find how to move slide control, read LED variables or move coil loaders.
