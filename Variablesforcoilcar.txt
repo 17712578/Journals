@@ -1,0 +1,28 @@
+
+
+
+
+	TCS______SIM_INTERN__ui32______RFM_T9__x_______DPSIM__DriveOn_PE021____________________ = 1;		// enables roller PE021 	/* Index:    467 */
+	TCS______SIM_INTERN__real______RFM_T9__x_______DPSIM__ScaledRotSpd_PE021_______________ = -3000;	// Speed and direction		/* Index:    434 */
+	TCS______SIM_INTERN__ui32______RFM_T9__x_______DPSIM__DriveOn_PE023____________________ = 1;		// roller PE023			/* Index:    469 */
+	TCS______SIM_INTERN__real______RFM_T9__x_______DPSIM__ScaledRotSpd_PE023_______________ = -3000;					/* Index:    436 */
+	TCS______SIM_INTERN__ui32______RFM_T9__x_______DPSIM__DriveOn_PE024____________________ = 1;		// roller PE024			/* Index:    470 */
+	TCS______SIM_INTERN__real______RFM_T9__x_______DPSIM__ScaledRotSpd_PE024_______________ = -3000;					/* Index:    437 */
+	
+	PVB______SIM_INTERN__real______RFM_T9__x_______Tr1CoilLifterSvoVlv_____________________ = 14275; // Coilcar Lifter speed
+	PVB______SIM_INTERN__real______RFM_T9__x_______Tr1ScaledRotSpd_CC______________________ = 5000; // Controls the horzonital speed and direction of the coil car 
+	PVB______SIM_INTERN__ui32______RFM_T9__x_______Tr1OpenBreak_CC_________________________ = 1; 	// Enables coilcar 1
+	MTLBSIG__SIM_INTERN__real______RFM_T1__x_______CcarTR1_ActPos__________________________ ; // Read only, shows position of coil car 1, is in preferred position at 4.06
+	
+	PVB______SIM_INTERN__real______RFM_T9__x_______Tr2CoilLifterSvoVlv_____________________	// Variables for CoilCar 2	/* Index:    408 */
+	PVB______SIM_INTERN__real______RFM_T9__x_______Tr2ScaledRotSpd_CC______________________ 				/* Index:    409 */	
+	PVB______SIM_INTERN__ui32______RFM_T9__x_______Tr2OpenBreak_CC_________________________					/* Index:    412 */
+	MTLBSIG__SIM_INTERN__real______RFM_T1__x_______CcarTR2_ActPos__________________________					/* Index:    350 */
+
+
+	PVB______SIM_INTERN__ui32______RFM_____x_______Booking_Pallet_ID_______________________ =33554432;	/* Index:    391 */
+	PVB______SIM_INTERN__ui32______RFM_____x_______Booking_Pallet_ID_1_____________________			/* Index:    392 */
+	PVB______SIM_INTERN__ui32______RFM_____x_______Booking_Pallet_Location_________________ = 83886080;	/* Index:    396 */
+	PVB______SIM_INTERN__ui32______RFM_____x_______Booking_Pallet_Location_1_______________			/* Index:    397 */
+	PVB______SIM_INTERN__ui32______RFM_____x_______Booking_Pallet_Location_2_______________			/* Index:    398 */
+	PVB______SIM_INTERN__bool______RFM_____x_______Booking_Coil_BookIn_____________________ = ture; 	/* Index:    389 */
