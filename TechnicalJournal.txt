@@ -18,3 +18,11 @@ The driver manaul
 	The first step is to open the driver
 	You can call RFM2gErrorMsg() function with the error to retrieve a description of the error code
 	Byte swapping may be required due to different systems requiring Big Endian & Little Endian 
+
+10/03/2017
+-To convert a decimal from a variable back in ascii
+	Decimal => hexdecimal => break into two individual bytes => compare against ascii table
+- My first Task is
+	To write some code that will load a pallet on to platform 21 and then have the platform move the
+	pallet 23 & 24, which centres the pallet over the coilcar lifter.  
+	Functions required are RFM2gPoke32, STDRFM2GCALL and a delay loop as we are unable to read the LEDs yet

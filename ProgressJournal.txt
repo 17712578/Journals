@@ -1,4 +1,4 @@
-08/03/2017
+﻿08/03/2017
 •	Teleco Meeting with Peter, Patrick, Dr Thomas and Ash
 •	Signed contracts, roughly 8 hour days required, I have copy for myself and the university.
 •	Met my demonstrator ‘Sia’ we will be working on the BaSys40 project together.
@@ -13,6 +13,6 @@
 •	Discovered which variables are linked to the Platforms, Coil car and Coil lifter.
 •	Still unable to find how to move slide control, read LED variables or move coil loaders.
 10/03/2017
-•	
-•
-•
+•	Worked out how to convert the Pallet Name and Location into a decimal number using the Ascii table.
+•	Started working out numbers required for code.
+•	Tested some of these numbers by manually entering them into the machine, successfully Bookin a pallet and moved it in both directions

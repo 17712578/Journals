@@ -18,22 +18,25 @@ if( result != RFM2G_SUCCESS )
 	return(-1);
 }
 
-	{
+	
 		// STDRFM2GCALL result = RFM2gPoke32(handle, Offset+Index*4,Value) Offset = 0x708840;
+		{	
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7378564,33554432) // Booking_Pallet_ID 
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376450,1345388544) // Poke "P1" into Booking_Pallet_ID_1 
 		
-		STDRFM2GCALL result = RFM2gPoke32(handle, 7378564,33554432) // Booking_Pallet_ID named SPACE " "
-		STDRFM2GCALL result = RFM2gPoke32(handle, 7376450,1345388544) // Booking_Pallet_ID_1 named P1
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376496,83886080) // Booking_Pallet_Location 
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376500,1346711602) //Poke "PE02" into Booking_Pallet_Location
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376504,822083584) // Poke "1" Booking_Pallet_Location
 		
-		STDRFM2GCALL result = RFM2gPoke32(handle, 7376496,83886080) // Booking_Pallet_Location named P
-		STDRFM2GCALL result = RFM2gPoke32(handle, 7376500,1346711600) //Booking_Pallet_Location named PE00
-		STDRFM2GCALL result = RFM2gPoke32(handle, 7376504,822083584) //Booking_Pallet_Location named 1
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376516,1) //Set Booking_Pallet_BookIn to "True" by inserting a '1'
+		sw_delay_ms(500);										 //Delay
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376516,0) //Set it back to "false"
+		sw_delay(500);	
 		
-		STDRFM2GCALL result = RFM2gPoke32(handle, 7376468,268435456) //Booking_Coil_Bookin named 1 
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376648,-5000) //Speed
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376780,1) //Drive on
 		
-		
-		
-		
-	}
+		}
 
 	/* Place API command example here */
 RFM2G_UINT32 Buffer[1];
@@ -50,6 +53,19 @@ if( result != RFM2G_SUCCESS )
 RFM2gClose( &Handle );
 return(result);
 }
+
+void sw_delay_ms(unsigned int delay)
+{
+	unsigned int i,j,k; // loop counters
+	char dummy = 0; // dummy variable to increment to waste time
+	for(i=0; i<=delay; i++) { // outer loop
+	for(j=0; j< calibration_count; j++) { // calibration loop
+	for(k=0; k<0xff; k++) { // inner time wasting loop
+	dummy++;
+				} // end inner loop
+			}// end calibration loop
+		} // end outer loop
+} // end software delay function
 
 void main(){
 RFM2G_STATUS result = rfm2gTestApiCommand(); 
