@@ -26,3 +26,6 @@ The driver manaul
 	To write some code that will load a pallet on to platform 21 and then have the platform move the
 	pallet 23 & 24, which centres the pallet over the coilcar lifter.  
 	Functions required are RFM2gPoke32, STDRFM2GCALL and a delay loop as we are unable to read the LEDs yet
+
+13/03/2017
+-First task is all most complete, just need to adjust timing as the Leds are not impleted as variables yet

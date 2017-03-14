@@ -19,5 +19,8 @@
 •	Started writing code so it ready to test next week. 
 13/03/2017
 •	Today the reflective memory got connected to the embedded server, which allows compiling of C programs on the embedded server
+•	More variables were also added to the system.
 •	Compiled the prepared code from last week, only a couple of errors.
-•	Once fixed the code successfully excuted 
+•	Once fixed the code successfully excuted, A pallet was loaded into the system and moved across.
+14/03/2017
+•	Going inspect house today
