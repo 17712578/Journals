@@ -23,4 +23,6 @@
 •	Compiled the prepared code from last week, only a couple of errors.
 •	Once fixed the code successfully excuted, A pallet was loaded into the system and moved across.
 14/03/2017
-•	Going inspect house today
+•	Inspected house today and accoommodation is sorted
+•	Today's task was to make my code more efficient, the different verison shal be kept in the technical journal
+15/03/2017
