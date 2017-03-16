@@ -1,7 +1,7 @@
 ﻿08/03/2017
-•	Teleco Meeting with Peter, Patrick, Dr Thomas and Ash
+•	Had Teleco meeting with Peter, Patrick, Dr Thomas and Ash
 •	Signed contracts, roughly 8 hour days required, I have copy for myself and the university.
-•	Met my demonstrator ‘Sia’ we will be working on the BaSys40 project together.
+•	Met my demonstrator ‘Zia’ we will be working on the BaSys40 project together.
 •	Went to the downstairs lab, learnt how to power up and shut down the severs
 •	Used Putty to start up in built MabLab equations, then displayed the full factory layout on Tv
 •	The aim of this project is to move the alumina rolls around the factory.
@@ -24,5 +24,19 @@
 •	Once fixed the code successfully excuted, A pallet was loaded into the system and moved across.
 14/03/2017
 •	Inspected house today and accoommodation is sorted
-•	Today's task was to make my code more efficient, the different verison shal be kept in the technical journal
+•	Today's task was to make my code more efficient, the different verison shall be kept in the technical journal
+•	Had an error in the swapFunction that was still unsolved at the end of the day.
 15/03/2017
+•	Sovled error in Swapfunction and Incorparated it into the main code
+•	Another problem arose when we tried to compile it in the Lab, apprently the machine runs on C89 and not C99. Forcing us to make some minor adjustments
+•	Eventually this was sorted and a pallet was loaded into the system, this time the name and location was determined by typing it in from the interface.
+•	Turned on a platform and stopped it after a certain amount of time, a couple of minior timing adjustments will result in the pallet stopping in the correct place.
+16/03/2017
+•	Today Dr Kuhn promised us Football tickets to the FC Kaiserslautern game.
+•	Was notified people are coming from Toyko to see our factory in April 24th 
+•	Fixed the timing adjustments from yesterday, now the pallet moves into the correct position ready to be picked up by the coil car.
+•	More code was added and the coil car moved into poisiton and the hydraulic lifter picked up the pallet.
+•	Unfortunelty this was where the luck ran out for today, as the coil car began to move off again and the pallet did not move with it.
+•	Took a video of the problem and will send it to the other organisation (SMS) and see thay know what the problem is.
+17/03/2017
+•	
