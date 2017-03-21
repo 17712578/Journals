@@ -39,4 +39,17 @@
 •	Unfortunelty this was where the luck ran out for today, as the coil car began to move off again and the pallet did not move with it.
 •	Took a video of the problem and will send it to the other organisation (SMS) and see thay know what the problem is.
 17/03/2017
-•	
+•	Started project plan for Latrobe University
+•	Sorted out what paperwork will be required on Monday
+
+20/03/2017
+•	Today i will get a german bank account and a residence permit from the city of Kaiserslautern.
+21/03/2017
+•	Successfully got a german bank account, residence permit and health insurance, still have to pay for TV/Radio connection even though i dont have TV.
+•	Also have passed all of these details  onto Petra Wulff, unsure wether we need a german tax file number.
+•	Today i was back in the Lab, for some reason the problem that occurred on the 16/03 suddendly is no longer a problem.
+• 	So now the pallet is carrying an aluminium coil and is moved from platform 21 to 23 & 24. Then the coil car carries the pallet and coil torwards the spool or mandrel as the germans call it.
+•	Zia is working on a function which sorts real numbers into integers, so we can read the actual position of coil car. 
+
+	
+ 	
