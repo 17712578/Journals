@@ -44,12 +44,26 @@
 
 20/03/2017
 •	Today i will get a german bank account and a residence permit from the city of Kaiserslautern.
+•	Provided the bank with my Australian tax file number
+•	Also learnt some history about Kaiserslautern and how the Emperor of Kaiserslautern once caught a fish 5 metres long and now its the emblem of Kaiserslautern.
 21/03/2017
+•	Had a skype meeting with Robert & Peter, Peter still thinks Germany is better than Australia, he obviously never had german sausages they are the Wurst......
+ 
+•	Also need to contact Sia and Thomas about company sensitive information.
 •	Successfully got a german bank account, residence permit and health insurance, still have to pay for TV/Radio connection even though i dont have TV.
 •	Also have passed all of these details  onto Petra Wulff, unsure wether we need a german tax file number.
 •	Today i was back in the Lab, for some reason the problem that occurred on the 16/03 suddendly is no longer a problem.
 • 	So now the pallet is carrying an aluminium coil and is moved from platform 21 to 23 & 24. Then the coil car carries the pallet and coil torwards the spool or mandrel as the germans call it.
 •	Zia is working on a function which sorts real numbers into integers, so we can read the actual position of coil car. 
-
-	
- 	
+•	Created a header file filed with defines and commented and neaten the all the code.
+22/03/2017
+•	Today we will test Zia's real number function
+•	It worked successfully, so if we enter a number for speed as an integer it will convert it to a real number.  
+•	THe factory recieved a massive update from SMS group, the factory now has an operation turn table and shift platform
+•	There is also operational lasers and the coil cars have more variables.	
+• 	Most of our C code will need to be rewritten as the variable names have changed and we will use the lasers to our advantage instead of time which was a little unreliable.
+•	Also we tested some of the new turn tables and they have glitches hopefully we can fix them tomorrow.
+23/03/2017
+•	Today we going to german classes
+•	SMS group will hopefully show us how the coil cars work why there are glitches when transporting the pallet. 
+•
