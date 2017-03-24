@@ -61,9 +61,18 @@
 •	It worked successfully, so if we enter a number for speed as an integer it will convert it to a real number.  
 •	THe factory recieved a massive update from SMS group, the factory now has an operation turn table and shift platform
 •	There is also operational lasers and the coil cars have more variables.	
+•	Pablo and Andrea visted our Lab, we gave a demostration of the factory's capabilities so far.
+	They are about to start work on another aspect of the larger BaSys40 project, so i wrote a small function for them so they have some sample code to analyse.
 • 	Most of our C code will need to be rewritten as the variable names have changed and we will use the lasers to our advantage instead of time which was a little unreliable.
 •	Also we tested some of the new turn tables and they have glitches hopefully we can fix them tomorrow.
 23/03/2017
-•	Today we going to german classes
+•	German classes were quite an experience, the teacher speaks german the whole time so have you have no idea what she is saying sometimes. Althouhgh we learn numbers, alphabet letters and greetings.
 •	SMS group will hopefully show us how the coil cars work why there are glitches when transporting the pallet. 
-•
+•	Today was very busy, did not have chance to contact SMS group, instuctions changed multiple times.
+•	I was working on learning the new factory update and creating a whole new header file, so far i was able to bookin a pallet and coil and move it, i cannot read a laser yet.	
+•	Objectives changed after lunch, the new objective is to just create a small function that moves a pallet from one platform to the other. Then integrate this function into an arhitecture called Feral.
+•	Java and Eclipse also need to be installed so we connected the internet to the server and started installing programs.
+24/03/2017 
+•	Had a fair bit of trouble installing eclipse and java today although we worked how to successfully read a laser.
+•	One number was causing all the problems, 4 instead of 3.
+•	Also worked on project plan 
