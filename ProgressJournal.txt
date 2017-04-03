@@ -1,4 +1,4 @@
-08/03/2017
+﻿08/03/2017
 •	Had Teleco meeting with Peter, Dr. Thomas Kuhn and Ash
 •	Signed contracts, roughly 8 hours per day required, I have copy for myself and the university.
 •	Met my demonstrator ‘Zia Zhang’ we will be working on the BaSys40 project together.
@@ -110,7 +110,7 @@
 • 	Also finally learnt how to move the new Coil Car, SMS group have added a hydraulic chamber to it which makes it more complex.
 
 03/04/2017
-•	Finished my project Plan over the weekend and submitted it to LMS this morning..
+•	Finished my project Plan over the weekend and submitted it to LMS this morning.
 
 
 >>>>>>> 1a5686e5a3ebd8bbddf0c229d0f0293c005cec09
