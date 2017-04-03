@@ -26,3 +26,156 @@ The driver manaul
 	To write some code that will load a pallet on to platform 21 and then have the platform move the
 	pallet 23 & 24, which centres the pallet over the coilcar lifter.  
 	Functions required are RFM2gPoke32, STDRFM2GCALL and a delay loop as we are unable to read the LEDs yet
+
+13/03/2017
+-First task is all most complete, just need to adjust timing as the Leds are not impleted as variables yet
+
+
+
+code as at 13/03
+
+		// STDRFM2GCALL result = RFM2gPoke32(handle, Offset+Index*4,Value) Offset = 0x708840;
+		{	
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7378564,33554432) // Booking_Pallet_ID 
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376450,1345388544) // Poke "P1" into Booking_Pallet_ID_1 
+		
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376496,83886080) // Booking_Pallet_Location 
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376500,1346711602) //Poke "PE02" into Booking_Pallet_Location
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376504,822083584) // Poke "1" Booking_Pallet_Location
+		
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376516,1) //Set Booking_Pallet_BookIn to "True" by inserting a '1'
+		sw_delay_ms(500);										 //Delay
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376516,0) //Set it back to "false"
+		sw_delay(500);	
+		
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376648,-5000) //Speed
+		STDRFM2GCALL result = RFM2gPoke32(handle, 7376780,1) //Drive on
+
+
+14/03/2017
+The swap function we are trying to update
+ int main (void)
+{
+	char Name[20];
+	char NewName[20];
+	unsigned int num1 = 0;
+	unsigned int num2 = 0;
+	unsigned int num3 = 0;
+	unsigned int num4 = 0;
+	
+	//while ((fgets( Name, sizeof(Name), stdin ) == (char *) NULL ) ||(strlen(Name) < 2))
+    	sprintf(Name, "PE021");
+   	 printf("The length of Name is: %d, NewName: %s\n",strlen(Name),  NewName);
+//	int a = 0;
+	for (int i = 5-1; i >= 0; i--)	
+	{
+		NewName[5-i] = Name[i];
+	//	a++;
+	}
+	printf("Name: %s, NewName: %s, the length of it is. %d \n",Name,  NewName, strlen(NewName));
+	
+	for (int i = (strlen(NewName) - 1); i >= 0; i--)	
+	{
+	   if (strlen(NewName) - i <= 4)
+	    { 
+	    	num1 = (num1 << 8) + NewName[i];
+    	}
+        else if(strlen(NewName)- i <= 8)
+    	{ 
+	    	num2 = (num2 << 8) + NewName[i];
+    	}
+    	else if(strlen(NewName)- i <= 12)
+    	{ 
+	    	num3 = (num3 << 8) + NewName[i];
+    	}
+    	else if(strlen(NewName)- i <= 16)
+    	{ 
+	    	num4 = (num4 << 8) + NewName[i];
+    	}
+    	
+	}
+    printf("%d,%d,%d,%d\n",num1,num2,num3,num4);
+}
+
+
+
+14/03/2017
+Add swap function and add a description
+void Swapstring (void)
+{
+	char Name[20];
+	unsigned int num1 = 0;
+	unsigned int num2 = 0;
+	unsigned int num3 = 0;
+	unsigned int num4 = 0;
+    	int i;
+	
+	while ((fgets( Name, sizeof(Name), stdin ) == (char *) NULL ) ||(strlen(Name) < 2)){} // This is where the code asks for user input
+    
+	if (Name[strlen(Name) - 1] == '\n') 	// In C89 the arrays always have a new line character at the end of the array, this was causing problems when converting to an int
+   	 Name[strlen(Name) - 1] = '\0';		// So these two lines of code removed the '\n' and replace it with null character '\o'
+    
+    	int a = 0;
+
+	for (i = (strlen(Name) - 1); i >= 0; i--)	// This for loop swaps the character order in the array and groups them into fours 
+	{
+	   if (strlen(Name) - a >= 13)
+	    { 
+	    	num4 = (num4 << 8) + Name[i];
+	    	a++;
+    	    }
+       	    else if(strlen(Name)- a >= 9)
+    	    { 
+	    	num3 = (num3 << 8) + Name[i];
+	     	a++;
+    	    }
+    	    else if(strlen(Name)- a >= 5)
+    	    { 
+	    	num2 = (num2 << 8) + Name[i];		// "<< 8" is beasuse we need to shift the numbers in hex 
+	    	a++;
+            }
+    	    else if(strlen(Name)- a >= 0)		// Eg. 'P''E''0''2''1' => '1''2''0''E''P'=> 0x31,0x32,0x30,0x45,0x50 => num1 = 0x32,0x30,0x45,0x50. num2 = 0x31
+    	    { 
+	    	num1 = (num1 << 8) + Name[i];		//i think this for loop is best code i have ever written
+	    	a++;
+    	    }
+	}
+    
+	if(direction == 1)
+	{
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID_1*4,num1); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_1 
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID_2*4,num2); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_2
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID_3*4,num3); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_3 
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID_4*4,num4); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_3
+	}
+	if(direction == 2)
+	{
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location_1*4,num1); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_1 
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location_2*4,num2); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_2
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location_3*4,num3); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_3 
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location_4*4,num4); 	//  Poke the Name of Pallet into variable Booking_Pallet_ID_3
+	}
+}	
+
+
+
+15/03/2017
+		
+		result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID*4,Pallet_ID); 			// Constant
+		 SetPalletName(); 									// Asks user for name of Pallet, swapString is called from this function 
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location*4,Pallet_Location);	// Constant
+		 SetLocationofPallet();									// Asks user for Location of Pallet, swapString is called from this function 
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_BookIn*4,True); 			//Book in that pallet to the location
+		 sleep(1);										//Delay for a second
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_BookIn*4,False); 			//Then reset the bookin variable so it can be used again another time
+		 result = RFM2gPoke32(Handle, offset + DPSIM__ScaledRotSpd_PE021*4,Speed); 		//Set speed of motors to a hardcoded value, will fix this later
+		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE021*4,1); 			//Turn on the platform
+		 result = RFM2gPoke32(Handle, offset + DPSIM__ScaledRotSpd_PE24*4,Speed);		//"			"
+		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE024*4,1); 			//"			"
+		 sleep(68);										//Wait for the pallet to be transfer across the platfroms
+		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE021*4,0); 			//Turn Platforms off
+		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE024*4,0); 			//
+		 
+
+
+

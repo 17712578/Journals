@@ -1,7 +1,7 @@
 ﻿08/03/2017
-•	Teleco Meeting with Peter, Patrick, Dr Thomas and Ash
+•	Had Teleco meeting with Peter, Patrick, Dr Thomas and Ash
 •	Signed contracts, roughly 8 hour days required, I have copy for myself and the university.
-•	Met my demonstrator ‘Sia’ we will be working on the BaSys40 project together.
+•	Met my demonstrator ‘Zia’ we will be working on the BaSys40 project together.
 •	Went to the downstairs lab, learnt how to power up and shut down the severs
 •	Used Putty to start up in built MabLab equations, then displayed the full factory layout on Tv
 •	The aim of this project is to move the alumina rolls around the factory.
@@ -17,7 +17,91 @@
 •	Started working out numbers required for code.
 •	Tested some of these numbers by manually entering them into the machine, successfully Bookin a pallet and moved it in both directions
 •	Started writing code so it ready to test next week. 
+<<<<<<< HEAD
 13/03/2017
 •	Today the reflective memory got connected to the embedded server, which allows compiling of C programs on the embedded server
 •	Compiled the prepared code from last week, only a couple of errors.
 •	Once fixed the code successfully excuted 
+=======
+
+13/03/2017
+•	Today the reflective memory got connected to the embedded server, which allows compiling of C programs on the embedded server
+•	More variables were also added to the system.
+•	Compiled the prepared code from last week, only a couple of errors.
+•	Once fixed the code successfully excuted, A pallet was loaded into the system and moved across.
+14/03/2017
+•	Inspected house today and accoommodation is sorted
+•	Today's task was to make my code more efficient, the different verison shall be kept in the technical journal
+•	Had an error in the swapFunction that was still unsolved at the end of the day.
+15/03/2017
+•	Sovled error in Swapfunction and Incorparated it into the main code
+•	Another problem arose when we tried to compile it in the Lab, apprently the machine runs on C89 and not C99. Forcing us to make some minor adjustments
+•	Eventually this was sorted and a pallet was loaded into the system, this time the name and location was determined by typing it in from the interface.
+•	Turned on a platform and stopped it after a certain amount of time, a couple of minior timing adjustments will result in the pallet stopping in the correct place.
+16/03/2017
+•	Today Dr Kuhn promised us Football tickets to the FC Kaiserslautern game.
+•	Was notified people are coming from Toyko to see our factory in April 24th 
+•	Fixed the timing adjustments from yesterday, now the pallet moves into the correct position ready to be picked up by the coil car.
+•	More code was added and the coil car moved into poisiton and the hydraulic lifter picked up the pallet.
+•	Unfortunelty this was where the luck ran out for today, as the coil car began to move off again and the pallet did not move with it.
+•	Took a video of the problem and will send it to the other organisation (SMS) and see thay know what the problem is.
+17/03/2017
+•	Started project plan for Latrobe University
+•	Sorted out what paperwork will be required on Monday
+
+20/03/2017
+•	Today i will get a german bank account and a residence permit from the city of Kaiserslautern.
+•	Provided the bank with my Australian tax file number
+•	Also learnt some history about Kaiserslautern and how the Emperor of Kaiserslautern once caught a fish 5 metres long and now its the emblem of Kaiserslautern.
+21/03/2017
+•	Had a skype meeting with Robert & Peter, Peter still thinks Germany is better than Australia, he obviously never had german sausages they are the Wurst......
+ 
+•	Also need to contact Sia and Thomas about company sensitive information.
+•	Successfully got a german bank account, residence permit and health insurance, still have to pay for TV/Radio connection even though i dont have TV.
+•	Also have passed all of these details  onto Petra Wulff, unsure wether we need a german tax file number.
+•	Today i was back in the Lab, for some reason the problem that occurred on the 16/03 suddendly is no longer a problem.
+• 	So now the pallet is carrying an aluminium coil and is moved from platform 21 to 23 & 24. Then the coil car carries the pallet and coil torwards the spool or mandrel as the germans call it.
+•	Zia is working on a function which sorts real numbers into integers, so we can read the actual position of coil car. 
+•	Created a header file filed with defines and commented and neaten the all the code.
+22/03/2017
+•	Today we will test Zia's real number function
+•	It worked successfully, so if we enter a number for speed as an integer it will convert it to a real number.  
+•	THe factory recieved a massive update from SMS group, the factory now has an operation turn table and shift platform
+•	There is also operational lasers and the coil cars have more variables.	
+•	Pablo and Andrea visted our Lab, we gave a demostration of the factory's capabilities so far.
+	They are about to start work on another aspect of the larger BaSys40 project, so i wrote a small function for them so they have some sample code to analyse.
+• 	Most of our C code will need to be rewritten as the variable names have changed and we will use the lasers to our advantage instead of time which was a little unreliable.
+•	Also we tested some of the new turn tables and they have glitches hopefully we can fix them tomorrow.
+23/03/2017
+•	German classes were quite an experience, the teacher speaks german the whole time so have you have no idea what she is saying sometimes. Althouhgh we learn numbers, alphabet letters and greetings.
+•	SMS group will hopefully show us how the coil cars work why there are glitches when transporting the pallet. 
+•	Today was very busy, did not have chance to contact SMS group, instuctions changed multiple times.
+•	I was working on learning the new factory update and creating a whole new header file, so far i was able to bookin a pallet and coil and move it, i cannot read a laser yet.	
+•	Objectives changed after lunch, the new objective is to just create a small function that moves a pallet from one platform to the other. Then integrate this function into an arhitecture called Feral.
+•	Java and Eclipse also need to be installed so we connected the internet to the server and started installing programs.
+24/03/2017 
+•	Had a fair bit of trouble installing eclipse and java today although we worked how to successfully read a laser.
+•	One number was causing all the problems, 4 instead of 3.
+•	Also worked on project plan 
+
+27/03/2017
+•	Today we managed to install and remove the remaining errors from Feral.
+•	Stared writing the code program to interface feral and SMS together.
+•	I have an greater understanding of why we are using Feral now, must remember to draw up a diagram illastrating how it works 
+•	Also worked on my project plan
+•	The $13000 mini factory arrived, why be used at a show next year, i think i get to experiement with it. 
+•	Will stay in my new apartment tonight 
+28/03/2017
+•	Installed Eclipse CDT on the linux machine
+•	Located all the header files and make files, put them all in the same folder so everything links
+•	It turns out FERAL is written in Java and might require a JNI or JNA 
+•	This topic requires more research, will speak to Thomas on 30th about it.
+29/03/2017
+•	worked on my project plan
+•
+•
+
+
+
+
+>>>>>>> 1a5686e5a3ebd8bbddf0c229d0f0293c005cec09
