@@ -7,6 +7,7 @@ Problems
 	Header file cannot be found
 	Reflective memory is not connected to the embedded server 
 
+
 09/03/2017
 The driver manaul
 -The driver contains API functions that enable you to
@@ -18,6 +19,7 @@ The driver manaul
 	The first step is to open the driver
 	You can call RFM2gErrorMsg() function with the error to retrieve a description of the error code
 	Byte swapping may be required due to different systems requiring Big Endian & Little Endian 
+
 
 10/03/2017
 -To convert a decimal from a variable back in ascii
@@ -161,7 +163,9 @@ void Swapstring (void)
 
 15/03/2017
 		
-		result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID*4,Pallet_ID); 			// Constant
+	void main()
+{
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID*4,Pallet_ID); 			// Constant
 		 SetPalletName(); 									// Asks user for name of Pallet, swapString is called from this function 
 		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location*4,Pallet_Location);	// Constant
 		 SetLocationofPallet();									// Asks user for Location of Pallet, swapString is called from this function 
@@ -174,8 +178,73 @@ void Swapstring (void)
 		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE024*4,1); 			//"			"
 		 sleep(68);										//Wait for the pallet to be transfer across the platfroms
 		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE021*4,0); 			//Turn Platforms off
-		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE024*4,0); 			//
+		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE024*4,0); 			//	 
+}
+
+
+21/03/2017
+
+	void main()
+{
+		//result = RFM2gPoke32(handle, Offset+Index*4,Value) Offset = 0x708840;	
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID*4,Starting_ID);	 	// Constant
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_ID*4,Starting_ID); 			// Constant
+		 SetPalletName(); 									// Calls the Function which receives the name of the pallet from the User
 		 
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_Location*4,Starting_Location);	// Constant
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_Location*4,Starting_Location);	// Constant
+		 SetLocationofPallet(); 								// Calls the Function which receives the required location from the user
+		 
+		 /* Set parameters of the aluminium coil */
+
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_OuterDiameter*4,OuterDiameter);		
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_InnerDiameter*4,InnerDiameter);
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_Width*4,Width);
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_Thickness*4,Thickness);
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_Temperature*4,Temperature);
+		 
+		 /* Books in the Pallet and Coil, also reset the variables back to off so it is possible to use again*/
+
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_BookIn*4,On); 	
+		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_BookIn*4,Off); 		
+		 sleep(1);										//Give the pallet time to appear on screen
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_BookIn*4,On); 	
+		 result = RFM2gPoke32(Handle, offset + Booking_Coil_BookIn*4,Off); 		
+		
+		 /* Turn on and adjust speed of platforms*/
+
+		 result = RFM2gPoke32(Handle, offset + ScaledRotSpd_PE021*4,Speed); 
+		 result = RFM2gPoke32(Handle, offset + DriveOn_PE021*4,1); 
+		 result = RFM2gPoke32(Handle, offset + ScaledRotSpd_PE024*4,Speed); 
+		 result = RFM2gPoke32(Handle, offset + DriveOn_PE024*4,1); 
+		 sleep(67); 										//Wait for pallet to arrive at position
+		 result = RFM2gPoke32(Handle, offset + DriveOn_PE021*4,0); 				//Turn off platforms
+		 result = RFM2gPoke32(Handle, offset + DriveOn_PE024*4,0); 
+		 
+		 /* Turn on and adjust speed of the Coil Car*/
+
+		 result = RFM2gPoke32(Handle, offset + Tr1OpenBreak_CC*4,On); 				//Sart
+		result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,PositiveSpeed); 
+		sleep(23);										//Wait for Coilcar to arrive at position												
+		result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,Off); 			//Stop
+		result = RFM2gPoke32(Handle, offset + Tr1CoilLifterSvoVlv*4,4234310);			//Raise lifter
+		sleep(5);										//Wait for lifter to reach desired height
+        
+		 /* Read the actual position of the Coil Car, convert this real data to
+			an integer and compare to the end position */
+
+		 result = RFM2gPeek32(Handle, offset + CcarTR1_ActPos*4,&BitpatternPos);
+		 SwapBitPattern = htole32(BitpatternPos);
+		 memcpy(&ActPos, &SwapBitPattern, sizeof(RFM2G_UINT32));
+		 while (ActPos <= End_Position)
+		 {
+			 result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,PositiveSpeed);	// Stays trapped within this while loop until the Car reaches its desination 
+			 result = RFM2gPeek32(Handle, offset + CcarTR1_ActPos*4,&BitpatternPos);
+			 SwapBitPattern = htole32(BitpatternPos);
+			 memcpy(&ActPos, &SwapBitPattern, sizeof(RFM2G_UINT32));
+		 }
+		 result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,False);			//Turn off Coilcar
+}
 
 
 
