@@ -247,4 +247,132 @@ void Swapstring (void)
 }
 
 
+31/03/2017
+
+The Layout of the directory inside the Eclipse workspace, only important files shown. 
+
+part.component.connentor.c
+     >>	testsuite
+     	     >>	drivebelt			(Java package, run as java application to start program)
+		     >>	TestCDrivebelt		(Simple java file that creates input & output ports)
+			TestConnectorDrivebelt	(A more complex java file shown below)
+     >>	src.c.testsuite
+	     >>	driveBeltsimple.simple
+		     >>	Local.h 	(Header file that contains all the factory variables)
+			main.c 		(Main C file)
+			main.o		(Executeable file for main.c)
+			makefile 	(Makefile which links the directory of all other header files)
+			libdriveBeltsimple.sc
+
+
+
+/* TestConnectorDrivebelt */
+
+package drivebelt;
+
+
+import part.connector.c.task.SingleTimedCTask;
+import director.timedirector.simpleapi.TimeTriggeredDomain;
+import scenario.consolescenario.ConsoleScenario;
+import simulator.core.framework.api.ScenarioIF;
+import simulator.core.framework.components.link.LinkImpl;
+import simulator.core.framework.director.coredirector.Director;
+import simulator.core.framework.time.SimulationDuration;
+import simulator.core.framework.time.SimulationTime;
+import sumController.helper.ConstantValueProvider;
+import testsuite.connector.c.timed.simpletask.behavior.TTValueConsumer;
+
+
+
+/**
+ * Test class for the simulator
+ * 
+ * This test scenario consists of a time triggered director that has a nested event
+ * triggered director
+ * 
+ * @author Dr. Thomas Kuhn
+ *
+ */
+
+public class TestConnectorDrivebelt {
+
+    /**
+     * Store simulation scenario
+     */
+    
+    protected ScenarioIF simulationScenario;
+    
+    
+    /**
+     * Constructor
+     * Sets up simulation scenario
+     */
+
+    public TestConnectorDrivebelt() {
+	// Create scenario with defined ending time
+        simulationScenario = new ConsoleScenario(new SimulationTime(1, 0));
+
+	// Create discrete event director as root component			     
+        Director director = new TimeTriggeredDomain(null, new SimulationDuration(SimulationDuration._1MS)); 
+ 
+	// - Add director as root component to simulation scenario
+        simulationScenario.setRootComponent(director);							     
+
+    	// Create simulation components and input value providers
+        ConstantValueProvider<Integer> p1 = new ConstantValueProvider<Integer>(director); p1.setValue(1);   	// this value will turn on the platforms
+        ConstantValueProvider<Integer>   p2 = new ConstantValueProvider<Integer>(director); p2.setValue(10000); // this value will set the speed of the platforms to 10000
+        
+        // - Create value consumers
+        TTValueConsumer c1 = new TTValueConsumer(director, "c1");	//This one is for the Laser 
+        
+        
+        String myLibPath = System.getProperty("user.dir")+("/src.c.testsuite/driveBelt.simple");
+        System.setProperty("java.library.path", myLibPath);
+        System.out.println(myLibPath);
+        
+        
+        
+        // C behavior task
+        SingleTimedCTask behavior = new TestCDrivebelt (director, System.getProperty("user.dir")+("/src.c.testsuite/driveBelt.simple/libdriveBelt_simple.so"));
+        
+        // Create links between component ports
+        new LinkImpl(p1, "output", behavior, "DriveOn");
+        new LinkImpl(p2, "output", behavior, "speed");
+        
+        new LinkImpl(behavior, "Laser1", c1, "input");
+        
+    }
+
+
+    /**
+     * Run this simulation scenario
+     */
+    public void runSimulationScenario() {
+        // Initialize simulation scenario
+        simulationScenario.init();
+        
+        // Print console message
+        simulationScenario.getConsole().debug("Testing nested directors using simplified interface (time->event)");
+    
+        // Start simulator
+        simulationScenario.execute();
+    }
+
+    
+    /**
+     * Main function
+     * 
+     * @param args Command line arguments
+     */
+    public static void main(String[] args) {
+        // Create and execute test component
+        new TestConnectorDrivebelt().runSimulationScenario();
+    }
+}
+
+
+
+
+
+
 

@@ -109,8 +109,12 @@
 •	I expect next week we will use FERAL to its full potential because right now it seems we have just made things more complicated.
 • 	Also finally learnt how to move the new Coil Car, SMS group have added a hydraulic chamber to it which makes it more complex.
 
+
 03/04/2017
 •	Finished my project Plan over the weekend and submitted it to LMS this morning.
-
-
+•	Have incorparated the laser in FERAL but Feral is calling the function in C too quickly so the pallet doesn't reach the lasers before it times out
+•	I will create pictures to better explain my progress right now.
+04/04/2017
+•	Zia and Dr Andreas Morggenstern are working on a state machine in the feral acrhitecture which will call the C function
+•	I am learning more about the feral and the whole process.
 >>>>>>> 1a5686e5a3ebd8bbddf0c229d0f0293c005cec09
