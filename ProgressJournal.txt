@@ -43,6 +43,7 @@
 17/03/2017
 •	Started project plan for Latrobe University
 •	Sorted out what paperwork will be required on Monday for City Hall. 
+•	Completed the Fraunhofer curruption test.
 
 
 20/03/2017
@@ -115,6 +116,13 @@
 •	Have incorparated the laser in FERAL but Feral is calling the function in C too quickly so the pallet doesn't reach the lasers before it times out
 •	I will create pictures to better explain my progress right now.
 04/04/2017
-•	Zia and Dr Andreas Morggenstern are working on a state machine in the feral acrhitecture which will call the C function
-•	I am learning more about the feral and the whole process.
->>>>>>> 1a5686e5a3ebd8bbddf0c229d0f0293c005cec09
+•	Zia and Dr Andreas Morggenstern are working on a state machine in the feral acrhitecture which will call the C functions
+•	While this is happening i am learning about makefiles, as my job mainly is working with C files.
+
+•	They're rumours going around Fraunhofer IESE that i'm the next 'Dennis Ritchie'(Google him).
+
+
+
+  
+
+

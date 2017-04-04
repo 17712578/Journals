@@ -7,7 +7,7 @@ Problems
 	Header file cannot be found
 	Reflective memory is not connected to the embedded server 
 
-
+---------------------------------------------------------------------------------------------------------
 09/03/2017
 The driver manaul
 -The driver contains API functions that enable you to
@@ -20,7 +20,7 @@ The driver manaul
 	You can call RFM2gErrorMsg() function with the error to retrieve a description of the error code
 	Byte swapping may be required due to different systems requiring Big Endian & Little Endian 
 
-
+---------------------------------------------------------------------------------------------------------
 10/03/2017
 -To convert a decimal from a variable back in ascii
 	Decimal => hexdecimal => break into two individual bytes => compare against ascii table
@@ -28,7 +28,7 @@ The driver manaul
 	To write some code that will load a pallet on to platform 21 and then have the platform move the
 	pallet 23 & 24, which centres the pallet over the coilcar lifter.  
 	Functions required are RFM2gPoke32, STDRFM2GCALL and a delay loop as we are unable to read the LEDs yet
-
+---------------------------------------------------------------------------------------------------------
 13/03/2017
 -First task is all most complete, just need to adjust timing as the Leds are not impleted as variables yet
 
@@ -53,7 +53,7 @@ code as at 13/03
 		STDRFM2GCALL result = RFM2gPoke32(handle, 7376648,-5000) //Speed
 		STDRFM2GCALL result = RFM2gPoke32(handle, 7376780,1) //Drive on
 
-
+---------------------------------------------------------------------------------------------------------
 14/03/2017
 The swap function we are trying to update
  int main (void)
@@ -100,9 +100,9 @@ The swap function we are trying to update
 }
 
 
-
+---------------------------------------------------------------------------------------------------------
 14/03/2017
-Add swap function and add a description
+Finished Swap Function
 void Swapstring (void)
 {
 	char Name[20];
@@ -160,9 +160,8 @@ void Swapstring (void)
 }	
 
 
-
-15/03/2017
-		
+---------------------------------------------------------------------------------------------------------
+15/03/2017		
 	void main()
 {
 		 result = RFM2gPoke32(Handle, offset + Booking_Pallet_ID*4,Pallet_ID); 			// Constant
@@ -181,9 +180,8 @@ void Swapstring (void)
 		 result = RFM2gPoke32(Handle, offset + DPSIM__DriveOn_PE024*4,0); 			//	 
 }
 
-
+---------------------------------------------------------------------------------------------------------
 21/03/2017
-
 	void main()
 {
 		//result = RFM2gPoke32(handle, Offset+Index*4,Value) Offset = 0x708840;	
@@ -246,9 +244,8 @@ void Swapstring (void)
 		 result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,False);			//Turn off Coilcar
 }
 
-
+---------------------------------------------------------------------------------------------------------
 31/03/2017
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 The Layout of the directory inside the Eclipse workspace, only important files shown. 
 
 part.component.connentor.c
@@ -341,7 +338,6 @@ public class TestConnectorDrivebelt
         new LinkImpl(behavior, "Laser1", c1, "input");   
     }
 
-
     /**
      * Run this simulation scenario
      */
@@ -355,8 +351,7 @@ public class TestConnectorDrivebelt
         // Start simulator
         simulationScenario.execute();
     }
-
-    
+  
     /**
      * Main function
      * 
@@ -367,7 +362,7 @@ public class TestConnectorDrivebelt
         new TestConnectorDrivebelt().runSimulationScenario();
     }
 }
-
+---------------------------------------------------------------------------------------------------------
 
 
 
