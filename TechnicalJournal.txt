@@ -248,7 +248,7 @@ void Swapstring (void)
 
 
 31/03/2017
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 The Layout of the directory inside the Eclipse workspace, only important files shown. 
 
 part.component.connentor.c
@@ -270,7 +270,6 @@ part.component.connentor.c
 
 package drivebelt;
 
-
 import part.connector.c.task.SingleTimedCTask;
 import director.timedirector.simpleapi.TimeTriggeredDomain;
 import scenario.consolescenario.ConsoleScenario;
@@ -282,8 +281,6 @@ import simulator.core.framework.time.SimulationTime;
 import sumController.helper.ConstantValueProvider;
 import testsuite.connector.c.timed.simpletask.behavior.TTValueConsumer;
 
-
-
 /**
  * Test class for the simulator
  * 
@@ -294,7 +291,8 @@ import testsuite.connector.c.timed.simpletask.behavior.TTValueConsumer;
  *
  */
 
-public class TestConnectorDrivebelt {
+public class TestConnectorDrivebelt 
+{
 
     /**
      * Store simulation scenario
@@ -308,7 +306,8 @@ public class TestConnectorDrivebelt {
      * Sets up simulation scenario
      */
 
-    public TestConnectorDrivebelt() {
+    public TestConnectorDrivebelt() 
+    {
 	// Create scenario with defined ending time
         simulationScenario = new ConsoleScenario(new SimulationTime(1, 0));
 
@@ -339,8 +338,7 @@ public class TestConnectorDrivebelt {
         new LinkImpl(p1, "output", behavior, "DriveOn");
         new LinkImpl(p2, "output", behavior, "speed");
         
-        new LinkImpl(behavior, "Laser1", c1, "input");
-        
+        new LinkImpl(behavior, "Laser1", c1, "input");   
     }
 
 
