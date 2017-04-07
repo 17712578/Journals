@@ -114,15 +114,21 @@
 03/04/2017
 •	Finished my project Plan over the weekend and submitted it to LMS this morning.
 •	Have incorparated the laser in FERAL but Feral is calling the function in C too quickly so the pallet doesn't reach the lasers before it times out
-•	I will create pictures to better explain my progress right now.
+•	I will create pictures to better explain my progress.
 04/04/2017
 •	Zia and Dr Andreas Morggenstern are working on a state machine in the feral acrhitecture which will call the C functions
 •	While this is happening i am learning about makefiles, as my job mainly is working with C files.
 
-•	They're rumours going around Fraunhofer IESE that i'm the next 'Dennis Ritchie'(Google him).
+•	They're rumours going around Fraunhofer IESE that i'm the next 'Dennis Ritchie'.
+05/04/2017
+•	Today more i installed more feral components onto Eclipse, in preparation for the state machine.
+•	I extended the simulation time in Eclipse and now my c function works perfectly.
+•	Now the pallet and coil spawns on PE021 and travels to PE023, stopping when the last laser beam is broken.
+06/04/2017
+•	The state machine has been installed on eclipse but does not work properly
+•	I have to wait for state machine to be fixed before i can continue my work in lab, apprently some decisions need to be made higher up.
+•	While i am waiting, i am writing more c files which will add functionality to factory and learnong more about makefiles.
+07/04/2017
 
-
-
-  
 
 
