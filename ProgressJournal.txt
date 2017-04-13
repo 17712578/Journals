@@ -127,8 +127,45 @@
 06/04/2017
 •	The state machine has been installed on eclipse but does not work properly
 •	I have to wait for state machine to be fixed before i can continue my work in lab, apprently some decisions need to be made higher up.
-•	While i am waiting, i am writing more c files which will add functionality to factory and learnong more about makefiles.
+•	While i am waiting, i am writing more c files which will add functionality to factory and learning more about makefiles.
 07/04/2017
+•	Recieved a german tax file 
+•	Worked on the new header file, which includes read and write for platforms (refer to technical journal for more details).
+
+Weekend: Helped Kaiserslautern Fc win 2:0,
+
+10/04/2017
+•	Last week was pretty slow, mainly due to the state machine not working and for the last two days my demostrator was away.
+•	My aim for this is to help get the state machine working in anyway possible and have it cycle thru 5 states by the end of the week.
+•	Finished the new Header file, almost 400 lines of variables
+•	A team from marketing visit our laboraty, they will select wether our Demostartor will be in next months exhibition.
+•	State machine is still does'nt work and the main software acrhitecture man is away for 2 weeks.....
+•	I have written 5 C Files in preparation for when it does work
+
+11/04/2017
+•	I will write more C files and test them today.
+•	So i have written another 15 C files, except this time they are more like functions because i have combined them into one file.
+•	I have made a imaginary statemachine in C so i can test all the separate funtions together. (refer to technical journal for more details).
+•	All 15 platforms work well expext the Rotation table, i should be able to sort that out tomorrow.
+•	There are a couple errors in my new header file
+
+12/04/2017
+•	Still finding a couple of errors in the header file  
+•	Almost got the rotational table to work
+•	The new Coil Car almost works as well
+•	I think i have added every required platform into the C program
+
+13/04/2017
+•	Dr Kuhn has found the error with the statemachine, hopefully it gets fixed next week.
+•	Had my first meeting with Markus, Pablo, Thomas and Zai in the Laboratory.  
+•	I showed what functionality i have achieved so far, everyone was pleased with my progess.
+•	I still have a few minor problems such, rotational table still doesnt work (it has to be perfect), the two coil cars share the same variable in my header file and my coil car funtion is not perfect.
+•	So since it is the Easter break tomorrow, i looked at my plan schedule to see how i am tracking. 
+•	Since the goals have changed it is a bit hard to tell but i believe i ahead of schedule by about three weeks!
+
+Easter Break
+
+
 
 
 

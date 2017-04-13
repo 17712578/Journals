@@ -221,7 +221,7 @@ void Swapstring (void)
 		 
 		 /* Turn on and adjust speed of the Coil Car*/
 
-		 result = RFM2gPoke32(Handle, offset + Tr1OpenBreak_CC*4,On); 				//Sart
+		 result = RFM2gPoke32(Handle, offset + Tr1OpenBreak_CC*4,On); 				//Start
 		result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,PositiveSpeed); 
 		sleep(23);										//Wait for Coilcar to arrive at position												
 		result = RFM2gPoke32(Handle, offset + Tr1ScaledRotSpd_CC*4,Off); 			//Stop
@@ -363,9 +363,51 @@ public class TestConnectorDrivebelt
     }
 }
 ---------------------------------------------------------------------------------------------------------
+07/04/2017
+
+Old header file
+
+#define DriveOn_PE001			//Each platform has two varaibles each
+#define ScaledRotSpd_PE001
+#define DriveOn_PE002
+#define ScaledRotSpd_PE002
+........
+#define CcarTR1_ActPos 343		//6 variables per coil car
+#define XSTr1CoilLifterActPos 344
+#define XSTr1CoilLifterCoilWeightFr 345
+#define Tr1CoilLifterSvoVlv 403			
+#define Tr1ScaledRotSpd_CC 404			
+#define Tr1OpenBreak_CC 407  			
+........
+					//No laser variables
 
 
 
+New header file
+
+#define Read_DriveOn_PE001 639		//Each platform has four varaibles each 
+#define Read_Speed_PE001 640
+#define Write_DriveOn_PE001 641 
+#define Write_Speed_PE001 642
+........
+#define  CoilCar1_PalDetected 605	//9 variables per coil car
+#define  CoilCar1_LiftHighPrOn 606
+#define  CoilCar1_TravRefPos 607
+#define  CoilCar1_LiftVlvLowPrOn 608
+#define  CoilCar1_LiftChkVlvDn 609
+#define  CoilCar1_LiftChkVlvUp 610
+#define  CoilCar1_LiftVlvUpDown 611
+#define  CoilCar1_TravActCnt 612
+#define  CoilCar1_LiftActCnt 613
+........
+#define PE001_BLST1_FwdSlow 430		// 5 laser variables per platform
+#define PE001_BLST2_FwdStop 431
+#define PE001_BLST3_BwdStop 432
+#define PE001_BLST4_BwdSlow 433
+#define PE001_BLSR1_CoilDetected 434
+
+Also includes variables for 9 new factory components
+----------------------------------------------------------------------------------------------------------
 
 
 
