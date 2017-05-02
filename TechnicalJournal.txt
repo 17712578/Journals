@@ -408,6 +408,438 @@ New header file
 
 Also includes variables for 9 new factory components
 ----------------------------------------------------------------------------------------------------------
+18/04/2017
+Template for my different states 
+
+      while(statemachine == 1) 
+    {    
+	// Code which turns on platforms 
+
+	// Code which reads the lasers
+
+         if((htobe32(Laser1) & htobe32(Laser2))== 1)
+            {
+        	 // code the turns off platforms
+        	 printf("End of stage 1\n ");
+        	 statemachine = 2;			//Next State
+            }
+
+	printf("Stage 1\n"); 				// Printf used for debugging and so i can montior which stage the code is at.
+    }  
+
+ Repeat 36 times.....
+
+---------------------------------------------------------------------------------------------------------- 
+24/04/2017
+ShiftTableController: {
+	// Create high level behavior using high level signals and commands only 
+	Instantiable ShiftTableController = fsm.type() {
+	
+		initial("waitForCoil") {
+			entry {
+				println "Waiting for command";
+			}
+			
+			// Receive a message that indicates that all four sensors are reporting a coil
+			to("shiftTablePart1") on Plant_CoilDetected;
+		}
+		
+		state("shiftTablePart1") {
+			entry {
+				println "The shift table is now moving";
+				fsm.tx("Speed_PU010", new IntegerMessage(20000));
+				fsm.tx("DriveOn_PU010", new IntegerMessage(1));
+			}
+			to("shiftTablePart2") on Message when {PU010_SBE2__TravBwdSlow == 1}
+		}
+		
+		state("shiftTablePart2") {
+			entry {
+				println "The shift table is slowing down";
+				fsm.tx("Speed_PU010", new IntegerMessage(5000));
+			}
+			to("shiftTablePart3") on Message when {PU010_SBE1__TravBwdStop == 1}
+		}
+		
+		state("shiftTablePart3") {
+			entry {
+				println "The shift table is stopping";
+				fsm.tx("DriveOn_PU010", new IntegerMessage(0));
+			}
+			to("Platform19") after ({ new SimulationDuration(1.s)});
+		}
+	}
+	
+	putOnMandrelController.runtimeEnvironment.changeBehavior(ShiftTableController);
+}
+
+---------------------------------------------------------------------------------------------------------- 
+25/04/2017
+
+putOnMandrelController: {
+	// Create high level behavior using high level signals and commands only 
+	Instantiable mandrelControllerBehavior = fsm.type() {
+
+
+	initial("waitForCoil") {
+		entry {
+			println "Waiting for command";
+		}
+		// Receive a message that indicates that all four sensors are reporting a coil
+		to("coilCarPart1") on Plant_CoilDetected;
+	}
+
+	state("coilCarPart1") {
+		entry {
+			println "Coil car is now moving to underneath the pallet";
+				
+			fsm.tx("Speed_K13BE", new IntegerMessage(20000));
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(1));
+		}
+		to("coilCarPart2") on Message when //{CoilCar1_TravActCnt > UNDER_THE_PALLET}	
+	}
+
+	state("coilCarPart2") {
+		entry {
+			//From here on, At the start of every state the variables from the previous state are turned off //
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(0));	
+			
+
+			println "Coil car is stationary, Lifter is lifting pallet!";
+			fsm.tx("CoilCar1_LiftChkVlvUp", new IntegerMessage(1));
+			fsm.tx("CoilCar1_LiftVlvUpDown", new IntegerMessage(writeRealNbr(17000)));
+			fsm.tx("CoilCar1_LiftVlvLowPrOn", new IntegerMessage(1));
+		}
+		to("coilCarPart3") on Message when //{CoilCar1_LiftActCnt > MAXIMUM_SAFTEY_HEIGHT}
+	}
+	
+	state("coilCarPart3") {
+		entry {
+			fsm.tx("CoilCar1_LiftChkVlvUp", new IntegerMessage(0));
+
+			fsm.tx("CoilCar1_LiftVlvUpDown", new IntegerMessage(0));
+
+			fsm.tx("CoilCar1_LiftVlvLowPrOn", new IntegerMessage(0));
+
+	
+			println "Coil car is now carrying pallet torwards the mandrel";
+				
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(1));
+		}
+		to("coilCarPart4") on Message when //{CoilCar1_TravActCnt > RIGHT_BEFORE_THE_MANDREL }
+	}
+
+	state("coilCarPart4") {
+		entry {
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(0));
+
+
+			println "Lifter is now moving pallet inline with Mandrel!";
+
+			fsm.tx("CoilCar1_LiftChkVlvUp", new IntegerMessage(1));
+	
+			fsm.tx("CoilCar1_LiftVlvUpDown", new IntegerMessage(writeRealNbr(17000)));//4234310
+				
+			fsm.tx("CoilCar1_LiftVlvLowPrOn", new IntegerMessage(1)); 
+		}
+		to("coilCarPart5") on Message when //{CoilCar1_LiftActCnt > INLINE_WITH_MANDREL}
+	}
+
+	state("coilCarPart5") {
+		entry {
+			fsm.tx("CoilCar1_LiftChkVlvUp", new IntegerMessage(0));
+
+			fsm.tx("CoilCar1_LiftVlvUpDown", new IntegerMessage(0));
+
+			fsm.tx("CoilCar1_LiftVlvLowPrOn", new IntegerMessage(0));
+
+
+			println "Coil car is now moving coil onto Mandrel!";
+
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(1));
+		}
+		to("coilCarPart6") on Message when //{CoilCar1_TravActCnt > ONTO_THE_MANDREL }
+	}
+
+	state("coilCarPart6") {
+
+		entry {
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(0));
+
+
+			println "Lifter is lowering away from the Mandrel!";
+
+			fsm.tx("CoilCar1_LiftChkVlvDn", new IntegerMessage(1));
+
+		}
+
+		to("coilCarPart7") on Message when //{CoilCar1_LiftActCnt > MINIMUM_SAFTEY_HEIGHT}
+
+	}
+
+	state("coilCarPart7") {
+			
+		entry {
+				
+			fsm.tx("CoilCar1_LiftChkVlvDn", new IntegerMessage(0));
+
+
+			println "Coil car is returning pallet to original position!";
+
+			fsm.tx("DriveOn_K13BE", new IntegerMessage(1));
+
+			fsm.tx("Speed_K13BE", new IntegerMessage(-20000));
+
+		}
+
+		to("Platform22") on Message when //{CoilCar1_TravActCnt > BACK_TO_PLATFORM }
+
+	}
+	}
+
+	putOnMandrelController.runtimeEnvironment.changeBehavior(mandrelControllerBehavior);
+}
+---------------------------------------------------------------------------------------------------------- 
+26/04/2017
+
+// Low-Level Behavior
+
+beltController2: {
+
+	// Create low behavior using level signals and low level commands
+
+	Instantiable beltControlbehavior2 = fsm.type() {
+
+def speed=20000;
+
+		initial("waitForCommand") {
+
+			// Receive a message that indicates that all four sensors are reporting a coil
+
+			println "beltController waiting for command";
+
+			to ("startMoving") on ERP_RequestPutonMandrel
+
+			// SMSVariableUpdateNotification when {FSMContainer fsm, SMSVariableUpdateNotification msg -> msg.getValue() == 1 && msg.src=="PE005_BLST1_FwdSlow"};
+
+			//to("startMoving") on SENSOR_ChangeMsg when {FSMContainer fsm, Message<?> msg -> msg.getValue() == Sensor_PE005_BLST3};
+
+		}
+
+
+
+		state("startMoving") {
+
+			entry{
+
+				FSMContainer fsm, msg->
+
+					println "start moving belts in FERAL"
+
+					fsm.tx("DriveOn_PE033", new IntegerMessage(1));
+
+					fsm.tx("Speed_PE033", new IntegerMessage(-speed));
+
+
+					
+fsm.tx("DriveOn_PE19", new IntegerMessage(1));
+
+					fsm.tx("Speed_PE019", new IntegerMessage(speed));
+
+
+					
+fsm.tx("DriveOn_PE021", new IntegerMessage(1));
+
+					fsm.tx("Speed_PE021", new IntegerMessage(speed));
+
+
+					
+fsm.tx("DriveOn_PE023a", new IntegerMessage(1));
+
+					fsm.tx("Speed_PE023a", new IntegerMessage(speed));
+
+		
+			
+					fsm.tx("DriveOn_PE023b", new IntegerMessage(1));
+
+					fsm.tx("Speed_PE023b", new IntegerMessage(speed));
+
+			}
+
+			to ("reduceSpeed") on SMSVariableUpdateNotification when {FSMContainer fsm, SMSVariableUpdateNotification msg -> msg.getValue() == 1 && msg.src=="PE023_BLST1_FwdSlow"};
+
+		}
+
+
+		
+state("reduceSpeed"){
+
+			entry{
+
+				FSMContainer fsm, msg->
+
+				fsm.tx("Speed_PE023", new IntegerMessage(5000));
+
+			}
+			
+			to("stopMoving") on SMSVariableUpdateNotification when {FSMContainer fsm, SMSVariableUpdateNotification msg -> msg.getValue() == 1 && msg.src=="PE023_BLST2_FwdStop"};
+
+		}
+
+
+		
+state("stopMoving"){
+
+			entry{
+
+				FSMContainer fsm, msg->
+
+					println "stop moving belts in FERAL"
+
+					
+fsm.tx("DriveOn_PE033", new IntegerMessage(0));
+
+					fsm.tx("Speed_PE033", new IntegerMessage(0));
+
+
+					
+fsm.tx("DriveOn_PE019", new IntegerMessage(0));
+
+					fsm.tx("Speed_PE019", new IntegerMessage(0));
+
+
+					
+fsm.tx("DriveOn_PE021", new IntegerMessage(0));
+
+					fsm.tx("Speed_PE021", new IntegerMessage(0));
+
+
+					
+fsm.tx("DriveOn_PE023a", new IntegerMessage(0));
+
+					fsm.tx("Speed_PE023a", new IntegerMessage(0));
+
+
+					fsm.tx("DriveOn_PE023b", new IntegerMessage(0));
+
+					fsm.tx("Speed_PE023b", new IntegerMessage(0));
+
+
+					
+fsm.tx("callNextService", new IntegerMessage(1));
+
+				
+}
+
+		}
+
+	}
+
+	DigRep_ControlBelt.changeBehavior(beltControlbehavior2);
+
+}
+
+---------------------------------------------------------------------------------------------------------- 
+27/04/2017
+
+#define STOP_POINT 10463600
+#define MAXIMUM_ERROR 10464350
+#define MINIMUM_ERROR 10462850
+
+while(statemachine == 46)
+{
+	//Read the variable the shows the position of the turn table 
+	result = RFM2gPeek32(Handle, offset + PL003_BWL1__TurnActCnt*4,&cnt);	
+	//htobe32() is a function that converts the 32 bit integer little endian format into and   
+	cnt2= htobe32(cnt);
+	while(cnt <= MINIMUM_ERROR && >= MAXIMUM_ERROR)
+	{
+		  result = RFM2gPeek32(Handle, offset + PL003_BWL1__TurnActCnt*4,&cnt);
+		  cnt2= htobe32(cnt);
+		  variablespeed = ((STOP_POINT - cnt2)/200)
+		  if(variablespeed > 20000)
+			{
+				variablespeed = 20000;
+			}
+		  printf("speed2 is: %d \n", variablespeed);
+		 result = RFM2gPoke32(Handle, offset + Write_Speed_PL003*4, htobe32(variablespeed));
+		 result = RFM2gPoke32(Handle, offset + Write_DriveOn_PL003*4,htobe32(drive_on));
+	}
+	result = RFM2gPoke32(Handle, offset + Write_DriveOn_PL003*4,htobe32(Off));
+	printf("Finished\n");
+}
+---------------------------------------------------------------------------------------------------------- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

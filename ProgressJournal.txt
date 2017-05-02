@@ -138,8 +138,8 @@ Weekend: Helped Kaiserslautern Fc win 2:0,
 •	Last week was pretty slow, mainly due to the state machine not working and for the last two days my demostrator was away.
 •	My aim for this is to help get the state machine working in anyway possible and have it cycle thru 5 states by the end of the week.
 •	Finished the new Header file, almost 400 lines of variables
-•	A team from marketing visit our laboraty, they will select wether our Demostartor will be in next months exhibition.
-•	State machine is still does'nt work and the main software acrhitecture man is away for 2 weeks.....
+•	A team from marketing visit our laboraty, they will select wether our Demostartor will be in next month's exhibition.
+•	State machine still does'nt work and the main software acrhitecture man is away for 2 weeks.....
 •	I have written 5 C Files in preparation for when it does work
 
 11/04/2017
@@ -165,6 +165,41 @@ Weekend: Helped Kaiserslautern Fc win 2:0,
 
 Easter Break
 
+18/04/2017
+•	Today's goal is to fix my coil car function and the error in the header file.
+•	My Demostator is aiming to get the Statemachine working by the end of the day.
+•	The real Statemachine finally works and i have adjusted my Coil Car function so it now works better.
+•	Over the next couple of days more of my statemachine (C based) will be moved into the new statemachine (Java based).
+
+19/04/2017
+•	continued working on the new statemachine.	
+•	Experiemented with what would happen if the lasers were broken, could time be used as a subsitute.
+
+20/04/2017
+•	Some more decisions have been made higher up, meaning i have to change my code again 
+•	Also worked on documentation 
+21/04/2017
+• 	complete rewrite of code
+
+24/04/2017
+• 	Wrote components for shift table in groovy   (see technical journal)
+25/04/2017
+•	wrote components for coil car in groovy	     (see technical journal)
+26/04/2017
+•	wrote components for part 3 in groovy	     (see technical journal)
+•	Starting writing PID for rotation table in C
+
+27/04/2017
+•	Finished writing PID for rotation table in C, tested it works perfectly (see technical journal)
+•	Will starting writing it in groovy
+•	SMS have installed an update that removes a few glitches 
+
+
+1/05/2017
+Public holiday
+
+2/05/2017
+•	
 
 
 
