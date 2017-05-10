@@ -770,6 +770,50 @@ while(statemachine == 46)
 }
 ---------------------------------------------------------------------------------------------------------- 
 
+public accelerationControllerBehavior(TimeTriggeredSimulationComponent simComponent) {
+	// Invoke constructor of base component
+	super(simComponent);
+
+	// Create input port
+	createInputPort("Read_PE005");
+	createInputPort("callService");
+	// Create output port
+	createOutputPort("Speed_PE005");
+	createOutputPort("DriveOn_PE005");
+	createOutputPort("ServiceFinished");
+}
+	
+
+	/**
+	 * Produce message
+	 */
+	@Override
+	public void timeStep() {
+		
+		
+		System.out.println("Calculating speed for platform");
+		
+		Message<? extends Object> StartMessage =  this.getInputMessage("callService");
+		if(StartMessage instanceof StartServiceMessage){
+		
+			int currentPlatformSpeed = this.getInputVariable("Read_PE005");
+			
+			if(currentPlatformSpeed > 20000)
+			{
+				 this.setOutputVariable("ServiceFinished","PlatformAtMaxspeed");
+				System.out.println("Platform has accelerated to its topspeed");
+			}
+			else
+			{
+				currentPlatformSpeed += 2000;
+			}
+
+			// - Set output value
+			this.setOutputVariable("Speed_PE005", currentPlatformSpeed );
+			this.setOutputVariable("DriveOn_P005", 1);
+		}
+	}
+}
 
 
 

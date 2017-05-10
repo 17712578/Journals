@@ -179,7 +179,7 @@ Easter Break
 •	Some more decisions have been made higher up, meaning i have to change my code again 
 •	Also worked on documentation 
 21/04/2017
-• 	complete rewrite of code
+• 	So the decision has been made that we will no longer use C language, all files\functions will be written in groovy (Java Hybird) 
 
 24/04/2017
 • 	Wrote components for shift table in groovy   (see technical journal)
@@ -195,12 +195,36 @@ Easter Break
 •	SMS have installed an update that removes a few glitches 
 
 
-1/05/2017
+01/05/2017
 Public holiday
 
-2/05/2017
+02/05/2017
+•	Naming variables properly has been a major experience
+
+
+03/05/2017
+•	Set up Lab for BaSys 4.0 Demostration, lots of important people came from other companies.
+•	I forgot how to tie a tie so i learnt it on Youtube 5 minutes beforehand.
+•	Met programmer/designer from SMS group, he has lots experience with manufacturing processes, he recommended a  couple of slight changes to the project.
+•	Added minor adjustments to feral code, like the coil moving more slowly onto mandrel.
+
+
+04/05/2017
+•	The BaSys 4.0 meeting continued so we could not use the lab downstairs
+	
+05/05/2017
+•	Restored lab to its original condition 
+•	Tested New groovy project in the Lab, groovy project has a path error	
+•	Objective for the end of the month has been set, 
+
+08/05/2017 
+•	Fixed path error, now attempting to fix rotation table errors
 •	
-
-
-
+09/05/2017 
+•	Almost Fixed rotation table errors, there is something wrong with the feral timing will need to do more research
+•	Created Deacceleration and acceleration for the platforms. (see technical journal)
+10/05/2017 
+•	Read FERAL examples
+•	Added read motor speed variables to feral 
+•	worked on progress report
 
