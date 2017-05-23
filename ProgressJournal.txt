@@ -1,4 +1,5 @@
-﻿08/03/2017
+﻿
+08/03/2017
 •	Had Teleco meeting with Peter, Dr. Thomas Kuhn and Ash
 •	Signed contracts, roughly 8 hours per day required, I have copy for myself and the university.
 •	Met my demonstrator ‘Zia Zhang’ we will be working on the BaSys40 project together.
@@ -228,3 +229,34 @@ Public holiday
 •	Added read motor speed variables to feral 
 •	worked on progress report
 
+12/05 to 15/05 in London
+	
+
+16/05/2017
+•	Creating PID motor controller enviroment in FERAL
+
+17/05/2017
+•	PID motor controller is over complicated, will come back to it later.
+
+18/05/2017
+•	Spilt speed controller into two parts Acceleration/Deceleration
+•	Will incorparate logger into project next week
+•	Start learning java course, topics are basic loops and variables
+
+19/05/2017
+•	Learning java. Toady topics are User input, Arrays, Methods, Classes and objects 
+•	Went to BaSys 4.0 architecture meeting, the next stage of the acrhitecture is going start on Monday.
+•	Myself and Zia must provide the playground for the architecture to be tested on.
+
+
+22/05/2017
+•	Learning java. Toady topics are Constructors, static and final variables, Setters and "this", Method Parameters, Getters and Return values.
+•	Started building 'Forwarded' component 
+•	It consists of a generator, a forwarded and logger.
+•	Almost finished 'Forwarded' component having problems with linking the Array list from the generator to multiple forwarder components
+
+23/05/2017
+•	Learning java. Toady topics are inheritances, String builder, string Formatting,  
+•
+•
+•
