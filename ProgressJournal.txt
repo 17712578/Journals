@@ -260,3 +260,18 @@ Public holiday
 •
 •
 •
+
+
+26/06/2017
+•	Started filming 
+27/06/2017
+•	Showed the Demonstrator to Honorable Dr.Peter Moar....
+28/06/2017
+•	Zia is leaving for 2 weeks holiday, so we had meeting discussing what i should do while she is away.
+•
+
+29/06/2017
+•	Added feature which returns the shift table back
+•	Need to contact SMS Group and tell them adjust the lightbarrier (laser) position, shift table overshoots position
+•	Found out how to change the name of the pallet 
+•	Need to create more Line controllers so behaviors can be ran in parallel 
