@@ -260,7 +260,19 @@ Public holiday
 •
 •
 •
-
+06/06/2017
+•	Disigned flowchart for digital twins
+•	Wrote a file which stores variables
+•	Attended a birthday party at work..
+•	Made a decision to use Array list instead of linked list as they have quicker access time
+07/06/2017
+•	Started writing the main component for digital twins
+•	Includes array map of the factory
+•	Message receiving function
+•	Scan area function
+•	and light  barrier logic
+08/06/2017
+•	Created an environment to test the position calculator
 
 26/06/2017
 •	Started filming 
