@@ -257,9 +257,14 @@ Public holiday
 
 23/05/2017
 •	Learning java. Toady topics are inheritances, String builder, string Formatting,  
-•
-•
-•
+•	Finished Fowarder Components
+24/05/2017
+•	Learning java. Today topic are instances
+•	Compacted 'Fowarder' components into 'AggregatedForwarder'
+•	Dr Kuhn checked the AggregatedForwarder
+
+
+
 06/06/2017
 •	Disigned flowchart for digital twins
 •	Wrote a file which stores variables
