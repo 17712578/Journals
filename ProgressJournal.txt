@@ -307,3 +307,7 @@ Public holiday
 •	Found out how to change the name of the pallet 
 •	Need to create more Line controllers so behaviors can be ran in parallel 
 
+04/07/2017
+•	Started making more behaviors, so now platforms will be more individualised rather than clumped togehter 
+•	Had to change SMSInformationModel( Where all the ports are Stored) and the main controller
+•	So far behaviors can only work in one direction
