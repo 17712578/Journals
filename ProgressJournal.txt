@@ -273,11 +273,30 @@ Public holiday
 •	and light  barrier logic
 08/06/2017
 •	Created an environment to test the position calculator
+•	Found and solved multiple errors, most time consuming part
+•	Created a new message class 
+•	Added a case statement instead of "if else" statements
+09/06/2017
+•	Tidy up logic methods, separated them and made them smaller
+•	Tested logic when direction was in opposite direction 
+•	Had meeting, i will start doing some work with Thomas Baur
+
+12/06/2017
+•	Researched use cases from other german companies on Industry 4.0
+•	Created excel spread sheet that displayed these use cases
+13/06/2017
+•	Put position calculator and environment control on the SMS demonstrator down stairs
+•	This caused more unforseen errors to surface, i fixed multiple errors but position calculator does not work yet
+14/06/2017
+•	Did more use cases
+•	Still could'nt fix error on SMS demostrator 
+•	Started writing report on Industry 4.0
 
 26/06/2017
 •	Started filming 
 27/06/2017
-•	Showed the Demonstrator to Honorable Dr.Peter Moar....
+•	Showed the SMS Demonstrator to Honorable Dr.Peter Moar....
+•	Answered interview questions and partisapated in B-roll filming
 28/06/2017
 •	Zia is leaving for 2 weeks holiday, so we had meeting discussing what i should do while she is away.
 •
@@ -287,3 +306,4 @@ Public holiday
 •	Need to contact SMS Group and tell them adjust the lightbarrier (laser) position, shift table overshoots position
 •	Found out how to change the name of the pallet 
 •	Need to create more Line controllers so behaviors can be ran in parallel 
+
