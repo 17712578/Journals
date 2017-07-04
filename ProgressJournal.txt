@@ -262,9 +262,29 @@ Public holiday
 •	Learning java. Today topic are instances
 •	Compacted 'Fowarder' components into 'AggregatedForwarder'
 •	Dr Kuhn checked the AggregatedForwarder
+25/05/2017
+•	Public Holiday
+26/05/2017
+•	No one really works on a Friday after a public holiday
+
+29/05/2017
+•	Finished progress report and submitted to LMS
+•	A new factory update has been installed onto the system, some small adjustments have been made. Also the interface on the laptop has been upgraded.
+•	Finished powerpoint presentation, submitted it to Robert and Peter for correction.
+30/05/2017
+•	Learning java. Today topic are instances
+•	Practiced reading powerpoint presentation out loud.
+31/05/2017	
+•	Presented power point presentation back back to LAtrobe University, went really well
+•	Did my tie a minute before the presentation again, must be good luck
+01/05/2017
+•	I have completed Accerelation & deceleration components in TimeTrigged and EventTriggered environments for practice 
+•	I have been working on this for the last week (See techinal journal)
 
 
 
+05/06/2017
+•	public holiday
 06/06/2017
 •	Disigned flowchart for digital twins
 •	Wrote a file which stores variables
