@@ -277,11 +277,17 @@ Public holiday
 31/05/2017	
 •	Presented power point presentation back back to LAtrobe University, went really well
 •	Did my tie a minute before the presentation again, must be good luck
-01/05/2017
+01/06/2017
 •	I have completed Accerelation & deceleration components in TimeTrigged and EventTriggered environments for practice 
 •	I have been working on this for the last week (See techinal journal)
-
-
+02/06/2017
+•	Added additional part to event enviroment, connected output port of decelerator to logger which records the outputted data
+•	I then created a graph of this data, will most likely be included in my thesis
+•	As its Friday we had our acrhitecture meeting the main points were:
+•	New architecture design has been given all clear by other teams
+•	A porposal has been put forward by Thomas, on what is the minimum amount of information required to describe a singular device
+•	I have been assigned a new task of creating digital twins!!
+•	I shall do some planning over the long weekend, the next couple of weeks will be exciting but challenging
 
 05/06/2017
 •	public holiday
@@ -316,6 +322,16 @@ Public holiday
 •	Did more use cases
 •	Still could'nt fix error on SMS demostrator 
 •	Started writing report on Industry 4.0
+15/06/2017
+•	Still writing report on Industry 4.0, will include some of the interesting use cases in it
+16/06/2017
+•	Discussed my Industry 4.0 report with Markus, Fixed some of the technical aspects
+•	Markus also gave a great example of data secuity issues that are just starting to arise now because of new technology 
+•		So Fraunhofer IESE has many printers which its employees can print too, however it does not own these
+		printers or have to perform maintenance on the printers either. Fraunhofer has an agreement with a printer
+		company that charge Fraunhofer per page. So for the printer company to know how much Fraunhofer has printed they 
+		gather information from the printers. However that information might also include what excatly Fraunhofer is printing,
+		giving the printer company insight into fraunhofer's business. Which Fraunhofer would prefer to keep secert. 
 
 26/06/2017
 •	Started filming 
@@ -325,14 +341,21 @@ Public holiday
 28/06/2017
 •	Zia is leaving for 2 weeks holiday, so we had meeting discussing what i should do while she is away.
 •
-
 29/06/2017
 •	Added feature which returns the shift table back
 •	Need to contact SMS Group and tell them adjust the lightbarrier (laser) position, shift table overshoots position
 •	Found out how to change the name of the pallet 
 •	Need to create more Line controllers so behaviors can be ran in parallel 
 
-04/07/2017
+03/07/2017
 •	Started making more behaviors, so now platforms will be more individualised rather than clumped togehter 
-•	Had to change SMSInformationModel( Where all the ports are Stored) and the main controller
-•	So far behaviors can only work in one direction
+•	Had to change SMSInformationModel( Where all the ports are Stored) and the main controller	
+04/07/2017
+•	Started testing simulation 
+•	Found an error on PE033, lightbarriers are incorrectly labelled  
+•	So far new behaviors can only work in one direction
+05/07/2017
+•	Control belt behaviors are operational in both directions 
+•	Tried to make LineController control speed of the motors, did not work
+•	Successfully booked in Two pallets and Coil automactically 
+•	Although i have a problem. Pallet1 travels fine until it reaches where pallet2 started, it then stops there.
