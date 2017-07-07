@@ -365,7 +365,12 @@ Public holiday
 •	Finally found the solution to the major problem!!
 •	The problem was inside the behaviors, The FSM inside these behaviors was not returning to its original state. 
 07/07/2017
-•	
+•	Attempted to link digital twins  to line controller (Not complete at the end of the day)
+•	Fixed another error with the platform 16 but unsure why the solutions works
+•	Attend Friday meeting:
+	Dr Kuhn recommend having one LineController and multiple Palletcontrollers for the pallets
+	I am also allow to change the names of the beltcontroller to make them easier to understand
+•	Now beginning renaming stuff and neating code, Dr Kuhn is happy with the progress. 
 
 10/07/2017
 • Still in Paris
