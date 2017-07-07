@@ -359,3 +359,13 @@ Public holiday
 •	Tried to make LineController control speed of the motors, did not work
 •	Successfully booked in Two pallets and Coil automactically 
 •	Although i have a problem. Pallet1 travels fine until it reaches where pallet2 started, it then stops there.
+06/07/2017
+•	Fixed problem occuring on PE033
+•	Updated project to SVN project, this had not been done for a long time
+•	Finally found the solution to the major problem!!
+•	The problem was inside the behaviors, The FSM inside these behaviors was not returning to its original state. 
+07/07/2017
+•	
+
+10/07/2017
+• Still in Paris
