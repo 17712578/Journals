@@ -376,4 +376,11 @@ Public holiday
 •	Still in Paris
 11/07/2017
 •	Starting to design product controllers, this will take a while.
+12/07/2017
+•	Something is wrong with Platform PE016 again 
+•	Making some progress on the new design, now have 1 pallet on the factory floor
+•	Will attempt to make instances of product controller everytime a pallet is loaded to the factory floor 
+•	What was wrong with the old design:
+	Everytime a product needed to be controlled, a new linecontroller would be connected into the system (A fair amount of code)
+	Now there will only be one linecontroller, that feed mutltiples instance of product control (Still one file just run as different instances) 
 
