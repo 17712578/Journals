@@ -383,4 +383,6 @@ Public holiday
 •	What was wrong with the old design:
 	Everytime a product needed to be controlled, a new linecontroller would be connected into the system (A fair amount of code)
 	Now there will only be one linecontroller, that feed mutltiples instance of product control (Still one file just run as different instances) 
-
+13/07/2017
+•	Making instances of the same behevior is not possible
+•	Fixed other odds and ends, except PE016 which is getting really annoying.
