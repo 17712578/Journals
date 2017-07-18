@@ -402,4 +402,12 @@ Public holiday
 •	So now the second pallet will wait til the first pallet get to certain checkpoints
 •	I have create a delayBehavior aswell
 
+18/07/2017 
+•	Had breakfast today
+•	Added more comments to the code
+•	Myself and Zai worked together to create only one positionCalculator file for ever pallet, also variables are no longer hardcoded but come from the main controller. 
+•	This worked but new connections are still required everytime the file is used.
+•	Trying now to redo the communication between productController to communicate with a DigitalTwin(positonCalculator)
+
+
 
