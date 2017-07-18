@@ -814,76 +814,104 @@ public accelerationControllerBehavior(TimeTriggeredSimulationComponent simCompon
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---------------------------------------------------------------------------------------------------------- 
+19/07/2017
+public class PE010BeltControllerBehavior {
+	// Create low behavior using level signals and low level commands
+	public static Instantiable beltControlbehavior = fsm.type() {
+			int speed=20000;
+		initial("waitForCommand") {
+			// Receive a message that indicates that all four sensors are reporting a coil
+			println "beltController waiting for command";
+			to ("waiting") on StartServiceMessage
+		}
+		state("waiting"){
+			to("startMoving") after {new SimulationDuration(1.s)};
+		}
+		state("startMoving") {
+			entry{
+				FSMContainer fsm, msg->
+					println "start moving platform PE010"
+					fsm.tx("DriveOn_PE009", new IntegerMessage(1));
+					fsm.tx("Speed_PE009", new IntegerMessage(speed));
+					fsm.tx("DriveOn_PE010", new IntegerMessage(1));
+					fsm.tx("Speed_PE010", new IntegerMessage(speed));
+					fsm.tx("DriveOn_PE011", new IntegerMessage(1));
+					fsm.tx("Speed_PE011", new IntegerMessage(speed));
+			}
+			to ("movingRightStopLeftSide") on UpdateNotificationMessage when {FSMContainer fsm, UpdateNotificationMessage msg -> msg.getValue() == 1 && msg.src=="PE011_BLST2_FwdStop"};
+			to ("movingLeftStopRightSide") on UpdateNotificationMessage when {FSMContainer fsm, UpdateNotificationMessage msg -> msg.getValue() == 1 && msg.src=="PE009_BLST3_BwdStop"};
+		}
+		state("movingRightStopLeftSide"){
+			entry{
+				FSMContainer fsm, msg->
+					println "stop moving platform PE010"
+					fsm.tx("DriveOn_PE009", new IntegerMessage(0));
+					fsm.tx("Speed_PE009", new IntegerMessage(0));
+					fsm.tx("DriveOn_PE010", new IntegerMessage(0));
+					fsm.tx("Speed_PE010", new IntegerMessage(0));
+					
+					fsm.tx("ServiceFinished", new ServiceFinishedMessage("beltControlPE010Finished"));
+			}
+			to ("waitForCommand");
+		}
+		state("movingLeftStopRightSide"){
+			entry{
+				FSMContainer fsm, msg->
+					println "stop moving platform PE010"
+					fsm.tx("DriveOn_PE010", new IntegerMessage(0));
+					fsm.tx("Speed_PE010", new IntegerMessage(0));
+					fsm.tx("DriveOn_PE011", new IntegerMessage(0));
+					fsm.tx("Speed_PE011", new IntegerMessage(0));
+						
+					fsm.tx("ServiceFinished", new ServiceFinishedMessage("beltControlPE010Finished"));
+			}
+			to ("waitForCommand");
+		}
+	}
+}
+
+---------------------------------------------------------------------------------------------------------- 
+19/07/2017
+/**
+ * Product controller
+ * 
+ * @author kelly
+ *
+ */
+public class ProductController1Behavior{
+	public Instantiable productController1Behavior;
+	public ProductController1Behavior(String previousWaypoint){
+		productController1Behavior = fsm.type() {
+		String BehaviorMessage;
+	
+		initial("waitForCommand") {
+			//Start Product Controller once pallet and Coil have been booked in
+			to ("acquiringWaypoint") on ServiceFinishedMessage when {FSMContainer fsm, Message msg -> msg.getValue() == "CoilAtShopFloor"};	 
+		}
+			
+		state("acquiringWaypoint") {
+			entry {
+				FSMContainer fsm, msg ->
+					//Send previousWaypoint to Linecontroller and receive back a new waypoint to send as a behavior message to the beltControllers
+				
+					//System.out.println("Previous Message:" + previousWaypoint);	//Debug message
+					BehaviorMessage = LineControllerBehavior.getNextPlatformWaypoint(previousWaypoint);
+					previousWaypoint = BehaviorMessage;
+					//System.out.println("Behavior Message:" + BehaviorMessage);  //Debug message
+			   }					 
+			to ("StartBehavior");
+		   }
+		   
+		state("StartBehavior") {
+			entry{
+				FSMContainer fsm, msg ->
+					//Sends Behavior Message and return to above state once beltController has finished
+					 fsm.tx(BehaviorMessage, new StartServiceMessage());
+			   }
+			to ("acquiringWaypoint") on ServiceFinishedMessage when {FSMContainer fsm, Message msg -> msg.getValue() == (BehaviorMessage+"Finished")};
+		   }
+		}
+	}
+}
 
