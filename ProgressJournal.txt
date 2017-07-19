@@ -401,13 +401,14 @@ Public holiday
 •	Finally after several attempts got a productController to communicate with a DigitalTwin 
 •	So now the second pallet will wait til the first pallet get to certain checkpoints
 •	I have create a delayBehavior aswell
-
 18/07/2017 
 •	Had breakfast today
 •	Added more comments to the code
 •	Myself and Zai worked together to create only one positionCalculator file for ever pallet, also variables are no longer hardcoded but come from the main controller. 
 •	This worked but new connections are still required everytime the file is used.
 •	Trying now to redo the communication between productController to communicate with a DigitalTwin(positonCalculator)
-
-
-
+19/07/2017 
+•	Markus and Robert have both read my Industrie 4.0 project and given me feedback
+•	So i spent today on rewriting part of my report, i can also use some these parts in my thesis 
+•	Had potatoes again for lunch, that will be the last time for a while....
+•	Zai said she will discuss our error on the SMSDemostrator with Dr Kuhn tomorrow 
