@@ -427,7 +427,17 @@ Public holiday
 • 	Finally submitted Industry 4.0 report to LMS
 27/07/2017
 •	Today i think solved the communication between all three elements (LineController, ProductController and PositionCalculator)
-•	The reasont i say "i think" is because i can't test the program right now, due the machine not working\
+•	The reasont i say "i think" is because i can't test the program right now, due the machine not working
 •	I also changed the case statement in linecontroller to a much smaller 'for' loop 
 •	I should try to save some of this code to technical journal
+28/07/2017
+•	SMSdemostrator still not working
+•	Practiced more Generics
+
+31/07/2017
+•	Crash avoidance system now works for to pallets
+•	Had trouble booking in third Pallet
+•	Will discuss problems with Zai tomorrow
+•	Started Learning data structures 
+
 
