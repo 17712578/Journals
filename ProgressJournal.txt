@@ -437,7 +437,12 @@ Public holiday
 31/07/2017
 •	Crash avoidance system now works for to pallets
 •	Had trouble booking in third Pallet
+•	Unsure how to cycle through Position Calculator instances 
 •	Will discuss problems with Zai tomorrow
 •	Started Learning data structures 
-
+01/08/2017
+•	Changed LineController AGAIN! because instance problem from yesterday
+•	Added some more passing variables that will allow identification of instances easier 
+•	Have a problem with ProductController(FSM) not recieving variable from LineController 
+•	Either tomorrow or Thursday, Dr Kuhn and I will discuss the problem
 
