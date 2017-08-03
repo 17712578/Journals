@@ -441,8 +441,23 @@ Public holiday
 •	Will discuss problems with Zai tomorrow
 •	Started Learning data structures 
 01/08/2017
-•	Changed LineController AGAIN! because instance problem from yesterday
+•	Changed LineController AGAIN! because instances problem from yesterday
 •	Added some more passing variables that will allow identification of instances easier 
 •	Have a problem with ProductController(FSM) not recieving variable from LineController 
 •	Either tomorrow or Thursday, Dr Kuhn and I will discuss the problem
+02/08/2017
+•	So Today i was going to wait for Dr Kuhn to answer my question but instead i was notified that we have important guests coming tomorrow, so change of plans
+•	I wont wait for Dr Kuhn's answer instead i will try fix the problem by changing ProductController to EventTriggered in time for tomorrow.
+•	So I spent most of the day changing the ProductController(FSM) into a Event Trigger component just like LineController and Position Calculator.
+•	Since Product Controller is hooked up to all of the Belt behaviors(22 so far) it took a long time to change all the connections
+•	Finally got to test it late in the afternoon, 2 bugs are occuring in system, very hard to find due to the number of components
+03/08/2017
+•	Decided we are not going to find the bugs in time for the demonstration, so will just show an older version (Advantage of SVN)
+•	Presentation went well, thats 4 successful presentations, people always seem to be interested by it.
+•	So apparently there might be another presentation needed, later this afternoon, getting tired of waiting.
+•	Finally talked to Dr Kuhn, he showed me how fix the problem
+•	So that now leaves me with two options
+	1. Continue to try find solutions in Complex Event Triggered components
+	2. Test Finite State Machine solution, may also have bugs and will also be rather complex 
+•	Stay tuned folks 	
 
