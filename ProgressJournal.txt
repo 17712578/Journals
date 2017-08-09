@@ -460,4 +460,30 @@ Public holiday
 	1. Continue to try find solutions in Complex Event Triggered components
 	2. Test Finite State Machine solution, may also have bugs and will also be rather complex 
 •	Stay tuned folks 	
+04/08/2017
+•	Had a meeting, Meet notes were:
+	- User story document should be finished by this weekend 
+	- Myself and Zai are to then implement these user stories into the SMSDemonstrator
+	- By the end of August Dr Kuhn would like video edvidence of these user stories implemented on the SMSDemostrator
+	- Start with Chapter 3 and then try Chapter 2(much harder)
+•	Worked late Friday Afternoon  but finally fixed all Problems with Event Triggered Components and Finite State Machines
+
+07/08/2017
+•	Once again made accelerator and decelator components for the motors (user story)
+•	This time they were actually implemented onto the SMSDemostrator
+•	Apart from some fine tuning with the timing, he work as required. The components are called from the beltController FSM
+08/08/2017
+•	So i didnt quite understand how specific these user stories are, they actually define how they problem must be solved
+•	It does'nt help that the user stories are in german so i barely read them 
+•	Now that Zai has explained that the entire SMSDemonstrator must be made a certain way, we are working on changing components
+09/08/2017
+•	Components that i being trying to adapt to the user stories so far
+	- BeltSegmentFuehrungsKompontente(BeltBehavior): finished, should add it too the technical journal but i cant fill be thesis with code 
+	- ShiftTableFuehrungsKompontente(ShiftTable): almost finished
+	- TurnTableFuehrungsKompontente(RotationTable): had fair bit of trouble with this one but 1 tiny change may finish it.
+•	A fuehrungsKompontent is a FSM state machine that 
+				
+
+
+
 
