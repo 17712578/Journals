@@ -481,8 +481,13 @@ Public holiday
 	- BeltSegmentFuehrungsKompontente(BeltBehavior): finished, should add it too the technical journal but i cant fill be thesis with code 
 	- ShiftTableFuehrungsKompontente(ShiftTable): almost finished
 	- TurnTableFuehrungsKompontente(RotationTable): had fair bit of trouble with this one but 1 tiny change may finish it.
-•	A fuehrungsKompontent is a FSM state machine that 
-				
+•	A fuehrungsKompontent is a FSM state machine that includes, Acceleration component, Deceleration component and checks different light barriers.
+•	 Acceleration component and Deceleration component are ran parallel to lightbarrier states
+•	Another major change from previous "beltController" is that only one file of fuehrungsKompontent will be used unlike one for each platform in the past.
+10/08/2017	
+•	Spent most of the day fixing the rotation table but it works now, perfect 180 degree turn, however still need to add locking variables to aviod glitches when driving pallet on and off
+•	Modified BeltSegmentFuehrungsKompontente again and tested it successfully. People kept changing their minds about the design.
+•	
 
 
 
