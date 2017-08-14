@@ -488,7 +488,12 @@ Public holiday
 •	Spent most of the day fixing the rotation table but it works now, perfect 180 degree turn, however still need to add locking variables to aviod glitches when driving pallet on and off
 •	Modified BeltSegmentFuehrungsKompontente again and tested it successfully. People kept changing their minds about the design.
 •	
+11/08/2017
+•
 
+14/08/2017
+•	Merging the turnTable into a process, it works with two other belts
+•	
 
 
 
