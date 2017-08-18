@@ -489,11 +489,25 @@ Public holiday
 •	Modified BeltSegmentFuehrungsKompontente again and tested it successfully. People kept changing their minds about the design.
 •	
 11/08/2017
-•
+•	So apprently it does'nt need locking variables ..... for now
 
 14/08/2017
 •	Merging the turnTable into a process, it works with two other belts
 •	
 
 
-
+18/08/2017
+•	SO i have been really busy this week, events that happened
+•	Teleco with Peter
+•	Tested numerously, finished and commented BeltController, RotationTable, ShiftTable and CoilCar
+•	Started drawing flow charts of these components
+•	Started Bachelor Thesis
+•	Used Thomas's run command to my advantage 
+•	Problems that occurred and were found are
+	- One variable cannot be assigned to two diffferent ports
+	- Variables assigned to the wrong port
+	- states waiting for light Barriers to change rather than the end of parallel states
+	- states looping to quickly 
+	
+•	Continued tradition of eating chicken and chips on a Friday	
+	
