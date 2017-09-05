@@ -202,7 +202,6 @@ Public holiday
 02/05/2017
 •	Naming variables properly has been a major experience
 
-
 03/05/2017
 •	Set up Lab for BaSys 4.0 Demostration, lots of important people came from other companies.
 •	I forgot how to tie a tie so i learnt it on Youtube 5 minutes beforehand.
@@ -516,4 +515,7 @@ Spanish holidays
 
 04/09/2017
 •	Worked on thesis
-	
+05/09/2017
+•	Worked on new Mill layout with furnace
+•	Created FK for it
+•	Furnace has 11 variables
