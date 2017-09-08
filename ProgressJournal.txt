@@ -524,3 +524,7 @@ Spanish holidays
 •	Tested new components, success!
 •	Will finish the rest of the loop tomorrow hopefully
 •	Also worked on thesis 
+08/09/2017
+•	Added more stuff to the second test enviroment 
+•	Small error somewhere, PE027 does'nt want to link
+•	Also worked on thesis 
