@@ -527,4 +527,14 @@ Spanish holidays
 08/09/2017
 •	Added more stuff to the second test enviroment 
 •	Small error somewhere, PE027 does'nt want to link
+•	Recieved feedback from Robert on thesis structure 
+•	Also worked on thesis 
+
+11/09/2017
+•	Fixed small error but realised major changes will have to occur to FKs to parametized speed
+•	Also worked on thesis 
+
+12/09/2017
+•	Discussed with Zai the objectives in the future, saved a copy of the project for demonstrating in the future 
+•	We most likely start making changes to the project tomorrow. 
 •	Also worked on thesis 
