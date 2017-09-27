@@ -545,3 +545,14 @@ Spanish holidays
 •	Finished changing BeltSegment and SplitBeltSegment, so now they accept speed parameter and can adjust to go in either direction.
 •	Need to do more testing, to be certain it will work under any circumstance. 
 •	Also worked on thesis 
+
+19/09/2017
+•	Added comments to code and slightly rearranged the structure 
+
+22/09/2017 to 26/09/2017
+• 	Oktoberfest 
+
+27/09/2017
+•	Delivered a presentation
+•	learnt more about the connectivity of the system
+•	More thesis 
