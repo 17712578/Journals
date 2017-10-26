@@ -1150,3 +1150,204 @@ public class PositionCalculator extends EventTriggeredWorker {
 		//this.getSimulationComponent().getOutputPort("output").queueMessage(new IntegerMessage(speed));
 		this.getSimulationComponent().getOutputPort("output").queueMessage(new 								LightBarrierMessage("outputString",outputString));
 	}
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
+***Platform controller****
+ 
+class BeltSegFurhrungskomponenteBehavior {
+
+	private  enum State {
+			Neutral,
+			ForwardPass,
+			BackwardPass,
+			ForwardTakeover,
+			BackwardTakeover,
+			Transport,
+			Stop
+		};
+	
+	 public static Instantiable beltSegControlbehavior = fsm.type() {
+		int accelerationSpeed=0;
+		int decelerationSpeed =20000;
+		State stateCondition = State.Neutral;
+		String BeltID;
+		int speed;
+
+		initial("waitForCommand"){
+			println "#FK Director#: Waiting for Service from PC"
+			to("forwardOrBackwards") on CallServiceMessage when {FSMContainer fsm, CallServiceMessage msg -> msg.getValue() == "Transport"} run{
+				FSMContainer fsm, CallServiceMessage msg ->
+				BeltID = msg.UID;
+				speed = msg.Speed;
+				};
+		}
+	
+		state("forwardOrBackwards"){
+			entry{ FSMContainer fsm, msg ->
+				println "Deciding direction " +BeltID
+			}
+			to("forwardTakeoverState") when {speed > 0}; 
+			to("backwardTakeoverState") when {speed < 0};
+		}
+		state("backwardTakeoverState"){
+			entry{ FSMContainer fsm, msg ->
+				//Calls Acceleration of the platform or "Backward Takeover" then transistions to next state when pallet is completely on the platform
+				
+				stateCondition = State.BackwardTakeover;
+				println "State: Calling BackwardTakeoverStates "  +BeltID
+			}
+			to("backwardPassingState") on UpdateNotificationMessage when {FSMContainer fsm, UpdateNotificationMessage msg -> msg.getValue() == 1 && msg.src=="BwdStop"};
+			//Unless the Product Controller to interrupts with a message saying that there is pallet ahead
+			to("standby") on CallServiceMessage when {FSMContainer fsm, CallServiceMessage msg -> msg.getValue() == "PalletDetected"};
+		}
+		state("forwardTakeoverState"){
+			entry{ FSMContainer fsm, msg ->
+				//Excatly the same as "backwardTakeoverState" except in the opposite direction
+				stateCondition = State.ForwardTakeover
+				println "State: Pallet entering platform " +BeltID
+			}
+			to("forwardPassingState") on UpdateNotificationMessage when {FSMContainer fsm, UpdateNotificationMessage msg -> msg.getValue() == 1 && msg.src=="FwdStop"};
+			to("standby") on CallServiceMessage when {FSMContainer fsm, CallServiceMessage msg -> msg.getValue() == "PalletDetected"};
+		}
+		state("backwardPassingState"){
+			entry{ FSMContainer fsm, msg ->
+				//This state is waiting for the pallet to move off the platform
+				println "State: Pallet leaving platform "+BeltID
+			}
+			//Pallet leaving the front of the platform, call BackwardPass
+			to("finishedState") on UpdateNotificationMessage when {FSMContainer fsm, UpdateNotificationMessage msg -> msg.getValue() == 0 && msg.src=="BwdStop"} run{
+				stateCondition = State.BackwardPass
+			};
+		}
+		state("forwardPassingState"){
+			entry{ FSMContainer fsm, msg ->
+				//Excatly the same as "backwardPassingState" except in the opposite direction
+				println "State: Pallet leaving platform "+BeltID
+			}
+			to("finishedState") on UpdateNotificationMessage when {FSMContainer fsm, UpdateNotificationMessage msg -> msg.getValue() == 0 && msg.src=="FwdStop"} run{
+				stateCondition = State.ForwardPass
+			};
+		}
+		state("standby"){
+			entry{ FSMContainer fsm, msg ->
+				println "State: waiting for path ahead to clear "+BeltID
+			}
+			to("forwardOrBackwards") on CallServiceMessage when {FSMContainer fsm, CallServiceMessage msg -> msg.getValue() == "Allclear"};
+		}
+		state("finishedState"){
+			entry{ FSMContainer fsm, msg ->
+				println "Motor Stopped " +BeltID
+				fsm.tx("ServiceFinished", new ServiceFinishedMessage(stateCondition.name(), BeltID));
+			}
+			to("waitForCommand")
+		}
+		
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Acceleration or takeover states that run Parallel to main Transport states
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		initial("waitForAccelerationCall"){
+			//wait for Acceleration call from main Transport state
+			to("accelerateMotorForward") when {stateCondition == State.ForwardTakeover};
+			to("accelerateMotorBackwards") when {stateCondition == State.BackwardTakeover};
+		}
+		
+		state("accelerateMotorForward") {
+			entry{ FSMContainer fsm, msg->
+				//Start motor, then increase speed by 1000 every 0.05s until maximum speed of 20000 is reached
+				accelerationSpeed =  accelerationSpeed + 1000;
+				fsm.tx("DriveOn", new IntegerMessage(1));
+				fsm.tx("Speed", new IntegerMessage(accelerationSpeed));
+			}
+			to ("accelerateMotorForward") after {new SimulationDuration(11000000.ns)};
+			//the "speed" variable is sent in by the pallet controller
+			to ("finishedAcceleration") when {accelerationSpeed >= speed};
+		}
+		
+		state("accelerateMotorBackwards") {
+			entry{ FSMContainer fsm, msg->
+				//Exactly the same as previous state except in opposite direction
+				accelerationSpeed =  accelerationSpeed - 1000;
+				fsm.tx("DriveOn", new IntegerMessage(1));
+				fsm.tx("Speed", new IntegerMessage(accelerationSpeed));
+			}
+			to ("accelerateMotorBackwards") after {new SimulationDuration(11000000.ns)};
+			to ("finishedAcceleration") when {accelerationSpeed <= speed};
+		}
+		
+		state("finishedAcceleration"){
+			entry{ FSMContainer fsm, msg ->
+				//Acceleration is finished, set stateCondition back to neutral so either Acceleration or Deceleration can be called again
+				stateCondition = State.Neutral;
+				accelerationSpeed=0;
+			}
+			to("waitForAccelerationCall")run{
+				FSMContainer fsm, ServiceFinishedMessage msg -> fsm.tx("ServiceFinished", new ServiceFinishedMessage(stateCondition.name(), BeltID));}
+		}
+		
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Deceleration states that run Parallel to main Transport states
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		initial("waitForDecelerationCall"){
+			//wait for Deceleration call from main Transport state
+			to("decelerateMotorForward") when {stateCondition == State.ForwardPass};
+			to("decelerateMotorBackwards") when {stateCondition == State.BackwardPass};
+		}
+		
+		state("decelerateMotorForward") {
+			entry{ FSMContainer fsm, msg->
+				//Decrease speed by 1000 every 0.11s until minimum speed of 0 is reached
+				//decelerationSpeed will most likely start at 20000
+				decelerationSpeed = decelerationSpeed - 1000;
+				fsm.tx("Speed", new IntegerMessage(decelerationSpeed));
+			}
+			//this is timing is important, to stop pallet in the right place
+			to ("decelerateMotorForward")  after {new SimulationDuration(110000000.ns)}; 
+			to ("finishedDeceleration") when {decelerationSpeed <= 0};
+		}
+		
+		state("decelerateMotorBackwards") {
+			entry{ FSMContainer fsm, msg->
+				//Exactly the same as previous state except in opposite direction
+				decelerationSpeed = decelerationSpeed + 1000;
+				fsm.tx("Speed", new IntegerMessage(decelerationSpeed));
+			}
+			to ("decelerateMotorBackwards")  after {new SimulationDuration(110000000.ns)};
+			to ("finishedDeceleration") when {decelerationSpeed >= 0};
+		}
+		
+		state("finishedDeceleration"){
+			entry{ FSMContainer fsm, msg ->
+				//Deceleration is finished, Turn off the motor, reset variables 
+				fsm.tx("Speed", new IntegerMessage(0));
+				fsm.tx("DriveOn", new IntegerMessage(0));
+				decelerationSpeed = 0;
+				stateCondition = State.Neutral;
+			}
+			to("waitForDecelerationCall")run{
+				FSMContainer fsm, ServiceFinishedMessage msg -> fsm.tx("ServiceFinished", new ServiceFinishedMessage(stateCondition.name(), BeltID));}
+		}
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Stop state that run Parallel to main Transport states
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		initial("waitForCall"){
+			//wait for Emergency Stop call from main Transport state
+			to("stopMotor") when {stateCondition == State.Stop};
+		}
+		
+		state("stopMotor") {
+			entry{ FSMContainer fsm, msg->
+				//Perform Emergency Stop 
+				fsm.tx("Speed", new IntegerMessage(0));
+				fsm.tx("DriveOn", new IntegerMessage(0));
+				fsm.tx("ServiceFinished", new ServiceFinishedMessage(stateCondition.name(), BeltID))
+			}
+			to  ("waitForCall") run{stateCondition = State.Neutral;}
+		}
+	 }
+}
