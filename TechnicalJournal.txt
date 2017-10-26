@@ -915,3 +915,238 @@ public class ProductController1Behavior{
 	}
 }
 
+------------------------------------------------------------------------------------------------------------------------------------
+/**
+ * Pallet Position Calculator
+ * @author Kelly
+*/
+public class PositionCalculator extends EventTriggeredWorker {
+	//These variables need to be sent into the system from Bookin, Hardcoded for now
+	protected String outputString;
+	protected int currentPosition 				=   12;
+	protected String currentPlatformSpeedName = "PE033_speed";
+	protected String currentLightBarrier1Name = "PE033_BLST1_FwdSlow";
+	protected String currentLightBarrier2Name = "PE033_BLST2_FwdStop";
+	protected String currentLightBarrier3Name = "PE033_BLST3_BwdStop";
+	protected String currentLightBarrier4Name = "PE033_BLST4_BwdSlow";
+	//The variables for the next platform do not pre-defined, they are calculated based on the speed & direction
+	protected int nextPosition 					=   0;
+	protected int currentPlatformSpeedStatus	= 	0;
+	protected String nextLightBarrier1Name;
+	protected String nextLightBarrier2Name;
+	protected String nextLightBarrier3Name;
+	protected String nextLightBarrier4Name;
+	//These are defined to unknown state at the start (2), LightBarrier on (1), LightBarrier off (0),
+	protected int currentLightBarrier1Status = 2; 
+	protected int currentLightBarrier2Status = 2;
+	protected int currentLightBarrier3Status = 2;
+	protected int currentLightBarrier4Status = 2;
+	protected int nextLightBarrier1Status = 0;
+	protected int nextLightBarrier2Status = 0;
+	protected int nextLightBarrier3Status = 0;
+	protected int nextLightBarrier4Status = 0;
+	//Order of the platforms in the factory 
+	protected String[] factoryMapArray = ["05","08","09","10","11","06","03","12","15","14","13","16","33","19","21","23","22","26","20","29","27","28","30","25","31","34"];
+	
+	
+	public PositionCalculator(EventTriggeredSimulationComponent simComponent) {
+		// Invoke base constructor
+		super(simComponent);
+
+		// One input for the speed of the current platform
+		InputPort input1 = new InputPortImpl(this.getSimulationComponent());
+		input1.setName("currentSpeedPort");
+		this.getSimulationComponent().addComponent(input1);
+		
+		// Four inputs for the lightBarriers of the current platform 
+		InputPort input2 = new InputPortImpl(this.getSimulationComponent()); // Create input port
+		input2.setName("currentLaser1");// - Set port name
+		this.getSimulationComponent().addComponent(input1);// - Add input port to component
+		InputPort input3 = new InputPortImpl(this.getSimulationComponent());
+		input3.setName("currentLaser2");
+		this.getSimulationComponent().addComponent(input3);
+		InputPort input4 = new InputPortImpl(this.getSimulationComponent());
+		input4.setName("currentLaser3");
+		this.getSimulationComponent().addComponent(input4);
+		InputPort input5 = new InputPortImpl(this.getSimulationComponent());
+		input5.setName("currentLaser4");
+		this.getSimulationComponent().addComponent(input5);
+		
+		// Four inputs for the lightBarriers of the next platform 
+		InputPort input6 = new InputPortImpl(this.getSimulationComponent());
+		input6.setName("nextLaser1");
+		this.getSimulationComponent().addComponent(input6);
+		InputPort input7 = new InputPortImpl(this.getSimulationComponent());
+		input7.setName("nextLaser2");
+		this.getSimulationComponent().addComponent(input7);
+		InputPort input8 = new InputPortImpl(this.getSimulationComponent());
+		input8.setName("nextLaser3");
+		this.getSimulationComponent().addComponent(input8);
+		InputPort input9 = new InputPortImpl(this.getSimulationComponent());
+		input9.setName("nextLaser4");
+		this.getSimulationComponent().addComponent(input9);
+		
+		// One variable for the Switch status of the current platform
+		InputPort input10 = new InputPortImpl(this.getSimulationComponent());
+		input10.setName("input10");
+		this.getSimulationComponent().addComponent(input10);
+	
+		
+		// Create output port
+		OutputPort output = new OutputPortImpl(this.getSimulationComponent());
+		// - Set port name
+		output.setName("output");
+		// - Add output port to component
+		this.getSimulationComponent().addComponent(output);
+	}
+	
+	
+	/**
+	 * First component execution
+	 * 
+	 * This function may be used to set up initial timers
+	 */
+	@Override
+	public void initialize() {
+		//Receive Bookin position
+		// - Get current time
+		SimulationTime currentTime = this.getSimulationComponent().getSimulationTime();
+		// - Timer interval: 0.5 second							    
+		SimulationDuration timerInterval = new SimulationDuration(0, 500000000);
+		// - Trigger a timer for given interval
+		this.getSimulationComponent().scheduleTimer(currentTime.add(timerInterval), null);
+	}
+	
+	/**
+	 * An event has been received
+	 */
+	@Override
+	public void messageReceived(Message<? extends Object> rxMsg) {
+		// Get value of lightBarrier
+		if (rxMsg != null ) {
+			if(rxMsg instanceof LightBarrierMessage) {
+				//System.out.println("Current Source :" +rxMsg.src);
+				//System.out.println("nextLightBarrier1Name are :" +nextLightBarrier1Name);
+				switch (rxMsg.src) {
+					case currentPlatformSpeedName:	
+					currentPlatformSpeedStatus = rxMsg.getValue();
+					break;
+					case currentLightBarrier1Name:
+					currentLightBarrier1Status = rxMsg.getValue();
+					break;
+					case currentLightBarrier2Name:
+					currentLightBarrier2Status = rxMsg.getValue();
+					break;
+					case currentLightBarrier3Name:
+					currentLightBarrier3Status = rxMsg.getValue();
+					break;
+					case currentLightBarrier4Name:
+					currentLightBarrier4Status = rxMsg.getValue();
+					break;
+					case nextLightBarrier1Name:
+					nextLightBarrier1Status = rxMsg.getValue();
+					break;
+					case nextLightBarrier2Name:
+					nextLightBarrier2Status = rxMsg.getValue();
+					break;
+					case nextLightBarrier3Name:
+					nextLightBarrier3Status = rxMsg.getValue();
+					break;
+					case nextLightBarrier4Name:
+					nextLightBarrier4Status = rxMsg.getValue();
+					break;
+				}
+			}
+		}		
+	}
+	
+	private void updateScanArea () {
+		//There is a public map of the factory which includes the order of the platforms  
+		currentLightBarrier1Name = "PE0" + factoryMapArray[currentPosition] + "_BLST1_FwdSlow";
+		currentLightBarrier2Name = "PE0" + factoryMapArray[currentPosition] + "_BLST2_FwdStop";
+		currentLightBarrier3Name = "PE0" + factoryMapArray[currentPosition] + "_BLST3_BwdStop";
+		currentLightBarrier4Name = "PE0" + factoryMapArray[currentPosition] + "_BLST4_BwdSlow";
+		
+		nextLightBarrier1Name = "PE0" + factoryMapArray[nextPosition] + "_BLST1_FwdSlow";
+		nextLightBarrier2Name = "PE0" + factoryMapArray[nextPosition] + "_BLST2_FwdStop";
+		nextLightBarrier3Name = "PE0" + factoryMapArray[nextPosition] + "_BLST3_BwdStop";
+		nextLightBarrier4Name = "PE0" + factoryMapArray[nextPosition] + "_BLST4_BwdSlow";
+		
+		currentPlatformSpeedName = "PE0" + factoryMapArray[currentPosition] + "_speed";
+	}
+	
+		
+		
+	public void directionTest () {
+		if(currentPlatformSpeedStatus > 1) {
+			//Assign nextPlatform to the right of currentPlatform
+			nextPosition = currentPosition + 1;
+			this.updateScanArea();
+			this.logicForAntiClockwise();
+		}
+		else if(currentPlatformSpeedStatus < -1 ) {
+			//Assign nextPlatform to the left of currentPlatform
+			nextPosition = currentPosition - 1;
+			this.updateScanArea();
+			this.logicForClockwise();
+		}
+	}
+			
+	public void logicForAntiClockwise() {
+		if(currentLightBarrier1Status == 1) {
+			if (nextLightBarrier1Status == 0 && nextLightBarrier2Status == 0 && nextLightBarrier3Status == 0 					&& nextLightBarrier4Status == 0) {
+					if (currentLightBarrier4Status == 1) {
+						println "Pallet is completely on platform " + factoryMapArray[currentPosition];
+					}
+					else if (currentLightBarrier2Status == 1)  {
+						//println "Pallet is starting to arriving at "+ factoryMapArray[currentPosition];
+					}
+			}
+		else {
+			println "Something has been detected on the next Platform , Platform number:"+ factoryMapArray[nextPosition];
+		}
+		}
+		else if(currentLightBarrier1Status == 0) {
+			if ((currentLightBarrier2Status == 1) && (currentLightBarrier4Status == 1)) {
+				//println "Moving between " + factoryMapArray[currentPosition] "and" + factoryMapArray[nextPosition] ;
+			}
+			else if ((currentLightBarrier3Status == 1) && (currentLightBarrier4Status == 1)) {
+				//println "Pallet is moving off platform " + factoryMapArray[currentPosition];
+			}
+			else if ((currentLightBarrier4Status == 1) && (nextLightBarrier2Status == 1)) {
+				//println "Pallet is almost off platform " + factoryMapArray[currentPosition];
+			}
+			else if ((nextLightBarrier1Status == 1) && (nextLightBarrier2Status == 1)) {
+				//println "Pallet is off platform "+ factoryMapArray[currentPosition];
+				//println "changing current platform";
+				currentPosition = currentPosition + 1;
+				nextPosition = currentPosition + 1;
+				currentLightBarrier1Status = 1; currentLightBarrier2Status = 1; currentLightBarrier3Status = 0; 				currentLightBarrier4Status = 0;
+				nextLightBarrier1Status = 0;  nextLightBarrier2Status = 0;  nextLightBarrier3Status = 0;  					nextLightBarrier4Status = 0;
+				this.updateScanArea();
+			}
+		}
+	}
+		
+	
+	
+		
+	
+
+	/**
+	 * Timer has been expired
+	 */
+	@Override
+	public void timerExpired(TimedEvent timerEvent) {
+		// Call logic method
+		this.directionTest();
+		// - Get current time
+		SimulationTime currentTime = this.getSimulationComponent().getSimulationTime();
+		// - Timer interval: 0.5 seconds						   
+		SimulationDuration timerInterval = new SimulationDuration(0, 500000000);
+		// - Trigger a timer for given interval
+		this.getSimulationComponent().scheduleTimer(currentTime.add(timerInterval), null);
+		
+		//this.getSimulationComponent().getOutputPort("output").queueMessage(new IntegerMessage(speed));
+		this.getSimulationComponent().getOutputPort("output").queueMessage(new 								LightBarrierMessage("outputString",outputString));
+	}
